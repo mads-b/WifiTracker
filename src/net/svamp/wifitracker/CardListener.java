@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import net.svamp.wifitracker.core.Point3D;
+import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.WifiItem;
 
 import java.util.ArrayList;
@@ -84,10 +84,10 @@ public class CardListener {
 					apData.put(item.bss, ap);
 					
 					if(apData.get(item.bss).getDataSize()>9) {
-						Point3D apPosition = apData.get(item.bss).getApPosition();
+						LatLon apPosition = apData.get(item.bss).getApPosition();
 						Location loc = new Location("pp");
-						loc.setLongitude(apPosition.x);
-						loc.setLatitude(apPosition.y);
+						loc.setLongitude(apPosition.getLon());
+						loc.setLatitude(apPosition.getLat());
 						Bundle b=new Bundle(); 
 						b.putBoolean("newAPPointData", true);
 						b.putString("apName", item.ssid);
@@ -172,7 +172,7 @@ public class CardListener {
 	}
 
 	public double getCompassOrientation() {
-		return compassProcessor.getOrientation()[0];
+		return compassProcessor.getOrientation();
 	}
 
 	public int getNumberOfDataPoints() {
