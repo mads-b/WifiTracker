@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content">
+		<Button android:id="@+id/button_help" android:layout_height="wrap_content" android:text="@string/button_help" android:layout_width="wrap_content" android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/button_settings" android:layout_height="wrap_content" android:text="@string/button_settings" android:layout_width="wrap_content" android:layout_weight="1.0"></Button>
+	</LinearLayout>
+	<ListView android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:id="@+id/list_wifi_scan" android:layout_weight="1.0"></ListView>
+	<LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:layout_height="wrap_content">
+		<Button android:id="@+id/button_record_all" android:layout_height="wrap_content" android:text="@string/button_record_all" android:layout_width="wrap_content" android:layout_weight="1"></Button>
+		<Button android:id="@+id/button_record_selected" android:layout_height="wrap_content" android:text="@string/button_record_selected" android:layout_width="wrap_content" android:layout_weight="1.0"></Button>
+	</LinearLayout>
+
+</LinearLayout>
