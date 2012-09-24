@@ -5,9 +5,9 @@ import android.location.Location;
 import android.util.Log;
 import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.SignalDataPoint;
+import net.svamp.wifitracker.solver.GaussNewtonSolver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class APData {
 	//Number of points to use for every estimate of direction to AP.
@@ -81,51 +81,11 @@ public class APData {
 		//Simplicity assumption: On this scale, latitude and longitude are orthogonal
 		final double x0 = initialEstimate.getLon();
 		final double y0 = initialEstimate.getLat();
+		double[] solutionVector = {x0,y0,n0};
 
-		//Iterating values made to hold the ever-more accurate position and path loss exponents.
-		double xi[] = new double[coords.size()];
-		double yi[] = new double[coords.size()];
-		double ni[] = new double[coords.size()];
-		//Populate the estimators with initial values!
-		Arrays.fill(xi,x0);
-		Arrays.fill(yi,y0);
-		Arrays.fill(ni,n0);
-
-		//Very commonly used (in the formula): ln(10)
-		final double ln10 = Math.log(10);
-
-
-		//Fetch x1 and y1 (x and y in first row).
-		double x1 = coords.get(0).getCoords().getLon();
-		double y1 = coords.get(0).getCoords().getLat();
-		// Calculate r1 squared. This is the reference row:
-		double r1 = square(xi[0]-x1)+square(yi[0]-y1);
-
-		/* Relax a number of times! */
-		for(int n=0;n<7;n++) {
-			/* Start relaxing the matrix. Don't relax row 1, as this is the reference row! */
-			for(int i=1;i<points.size();i++) {
-				final double x=coords.get(i).getCoords().getLon();
-				final double y=coords.get(i).getCoords().getLat();
-
-				//Calculate ri squared for this row:
-				double ri = square(xi[i]-x)+square(yi[i]-y);
-				//New xi and yi estimate for this row:
-				xi[0] = 10*ni[0]/ln10*((x-xi[i])/ri-(x-x1)/r1);
-				yi[0] = 10*ni[0]/ln10*((y-yi[i])/ri-(y-y1)/r1);
-				//New ri estimate:
-				ni[0] = 10*(Math.log10(r1)-Math.log10(ri));
-			}
-			/* Paper never mentioned this; But: Fill xi,yi and ni with averages of themselves? */
-			double xiSum=0,yiSum=0,niSum=0;
-			for(int i=0;i<xi.length;i++) { xiSum+=xi[i]; yiSum+=yi[i]; niSum+=ni[i]; }
-			Arrays.fill(xi,xiSum/xi.length);
-			Arrays.fill(yi,yiSum/yi.length);
-			Arrays.fill(ni,niSum/ni.length);
-			/* End averages fill */
-		}
-		//Return estimated coordinates to AP. X is longitude.
-		return new LatLon(yi[0],xi[0]);
+		GaussNewtonSolver solver = new GaussNewtonSolver(coords);
+		solutionVector = solver.solve(solutionVector,5);
+		return new LatLon(solutionVector[1],solutionVector[0]);
 	}
 
 	/**

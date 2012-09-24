@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="271580a6-2cad-4ea2-83ef-b8921ada693d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/Jacobian.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/Jacobian.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
     </list>
     <ignored path="WifiTracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,14 +63,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="APData.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="APData.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="27" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0">
+            <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.5254237">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#530#539#0" expanded="true" />
-                <element signature="e#675#692#0" expanded="true" />
+                <element signature="e#560#569#0" expanded="true" />
+                <element signature="e#705#722#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,10 +94,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GaussNewtonSolver.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GaussNewtonSolver.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="27" selection-start="1116" selection-end="1116" vertical-scroll-proportion="-0.44787645">
+            <state line="54" column="13" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,7 +158,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/core/SignalDataPoint.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/core/LatLon.java" />
-        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/CompassView.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/core/Point3D.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" />
@@ -175,6 +171,7 @@
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/Jacobian.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" />
+        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
       </list>
     </option>
   </component>
@@ -767,17 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="27" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#530#539#0" expanded="true" />
-            <element signature="e#675#692#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="132" selection-start="812" selection-end="812" vertical-scroll-proportion="0.0">
@@ -803,9 +789,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="27" selection-start="1116" selection-end="1116" vertical-scroll-proportion="-0.44787645">
+        <state line="54" column="13" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.5254237">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#560#569#0" expanded="true" />
+            <element signature="e#705#722#0" expanded="true" />
           </folding>
         </state>
       </provider>
