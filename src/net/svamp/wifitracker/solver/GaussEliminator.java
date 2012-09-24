@@ -7,7 +7,17 @@ package net.svamp.wifitracker.solver;
  * Anything else will throw an IllegalArgumentException. This exception will also be thrown if the matrix is singular.
  */
 public class GaussEliminator {
-	public static double[] solve(double[][] A,double[] b) {
+	/**
+	 * Solves the given linear problem. A must be nonsingular and quadratic (nxn), and b must be of n length.
+	 * THe problem is defined as the problem Ax=b.
+	 * @param A
+	 * @param b
+	 * @return Solution vector x
+	 * @throws IllegalArgumentException If matrix is singular, nonquadratic, or if b is not the correct size compared to argument A.
+	 */
+	public static double[] solve(double[][] A,double[] b) throws IllegalArgumentException {
+		if(A.length != A[0].length) throw new IllegalArgumentException("Matrix A is not quadratic!");
+		if(A.length != b.length) throw new IllegalArgumentException("Solution vector b is not the correct size!");
 		GaussEliminator.gaussElimination(A,b);
 		GaussEliminator.backSubstitution(A,b);
 		return b;
@@ -18,8 +28,9 @@ public class GaussEliminator {
 	 * Takes an arbitrary quadratic matrix A, and a solution vector b, and in-place reduces A to row-echelon form.
 	 * @param A
 	 * @param b
+	 * @throws IllegalArgumentException When matrix is singular.
 	 */
-	private static void gaussElimination(double[][] A,double[] b) {
+	private static void gaussElimination(double[][] A,double[] b) throws IllegalArgumentException {
 		//For every column..
 		for(int k=0;k<A.length;k++) {
 			//Find pivot for this row..
