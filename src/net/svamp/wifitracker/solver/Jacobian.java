@@ -5,6 +5,7 @@ package net.svamp.wifitracker.solver;
  * the derivatives of a given function in multiple dimensions, the
  * implementation is problem-specific. But, for extensibility,
  * all classes using the jacobian, should implement this interface.
+ * Residuals are also computed in this class.
  */
 public interface Jacobian {
 
@@ -31,5 +32,11 @@ public interface Jacobian {
 	 * @param estimates New estimates for all the variables in the jacobian. The size of this parameter must be exactly the same as the number returned by getColSize().
 	 */
 	void setNewEstimates(double[] estimates);
+
+	/**
+	 * @param num The index of the residual to fetch.
+	 * @return Residual from one DRSS equation
+	 */
+	double getResidual(int num);
 
 }

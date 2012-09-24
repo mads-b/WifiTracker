@@ -10,6 +10,7 @@ import java.util.Iterator;
  */
 public class ThompsonJacobian implements Jacobian {
 	private double[][] jacobian;
+	private double[] residuals;
 	private Collection<SignalDataPoint> dataPoints;
 
 	//ln(10) is used OFTEN! make sure we calculate it once.
@@ -21,6 +22,7 @@ public class ThompsonJacobian implements Jacobian {
 	 */
 	public ThompsonJacobian(Collection<SignalDataPoint> dataPoints) {
 		jacobian = new double[dataPoints.size()][3]; //The paper specifies the unknowns x, y and n, in that order.
+		residuals = new double[dataPoints.size()];
 		this.dataPoints = dataPoints;
 	}
 
@@ -40,20 +42,59 @@ public class ThompsonJacobian implements Jacobian {
 		return 3;
 	}
 
+	/**
+	 *
+	 * @param estimates New estimates for all the variables in the jacobian. The size of this parameter must be exactly the same as the number returned by getColSize(). Format of this parameter is: xEstimate, yEstimate and nEstimate.
+	 */
 	@Override
 	public void setNewEstimates (double[] estimates) {
+		//Just giving them better names.
+		final double x = estimates[0];
+		final double y = estimates[1];
+		final double n = estimates[2];
+
+		//Start iterating over the dataset.
 		SignalDataPoint curPoint;
 		Iterator<SignalDataPoint> iterator = dataPoints.iterator();
-		int row=0;
+
+		/**
+		 * First point is the reference point for now. this point is pretty relevant,
+		 * I think, as it's an element in every equation in the jacobian.
+		 * TODO: Maybe take the most accurate datapoint as reference point here?
+		 */
+		SignalDataPoint firstPoint = iterator.next();
+		final double x1 = firstPoint.getCoords().getLon();
+		final double y1 = firstPoint.getCoords().getLat();
+
+
+		//Distance between data point and estimated AP position squared.
+		final double r1Sq = (x1-x)*(x1-x)+(y1-y)*(y1-y); // r_1, squared
+
+		int row=1;
 		while(iterator.hasNext()) {
 			curPoint = iterator.next();
-			/*Recompute the jacobian here! */
-			//df/dx:
-			jacobian[row][0] = 
+			double xi = curPoint.getCoords().getLon();
+			double yi = curPoint.getCoords().getLat();
+			double riSq = (xi-x)*(xi-x)+(yi-y)*(yi-y); //r_i, squared.
 
+			/*Recompute the jacobian here! All differentiations are differentiations on the DRSS function in Thompson.*/
+			//df/dx:
+			jacobian[row][0] = (10*n/ln10)*((x-xi)/riSq - (x-x1)/r1Sq);
+			//df/dy:
+			jacobian[row][1] = (10*n/ln10)*((y-yi)/riSq - (y-y1)/r1Sq);
+			//df/dn:
+			jacobian[row][2] = (10/ln10)*Math.log(Math.sqrt(r1Sq/riSq));
+
+			//Compute the residuals for all these DRSS expressions. Formula is the DRSS in Thompson.
+			residuals[row] = 10*n*Math.log10(Math.sqrt(riSq/r1Sq))+curPoint.getSignalStrength()-firstPoint.getSignalStrength();
 
 
 			row++;
 		}
+	}
+
+	@Override
+	public double getResidual (int num) {
+		return residuals[num];
 	}
 }
