@@ -61,6 +61,9 @@ public class CompassProcessor implements SensorEventListener {
 		}
 	}
 
+	/**
+	 * Moving average filter
+	 */
 	private class Filter {
 		static final int AVERAGE_BUFFER = 20;
 		float[] m_arr = new float[AVERAGE_BUFFER];
