@@ -60,7 +60,7 @@ public class ThompsonJacobian implements Jacobian {
 		/**
 		 * First point is the reference point for now. this point is pretty relevant,
 		 * I think, as it's an element in every equation in the jacobian.
-		 * TODO: Maybe take the most accurate datapoint as reference point here?
+		 * TODO: Maybe take the most accurate datapoint as reference point here? What about taking every second point as reference to spread risk?
 		 */
 		SignalDataPoint firstPoint = iterator.next();
 		final double x1 = firstPoint.getCoords().getLon();

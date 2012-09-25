@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="271580a6-2cad-4ea2-83ef-b8921ada693d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" />
     </list>
     <ignored path="WifiTracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,15 +65,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="APData.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="APData.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.5254237">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#560#569#0" expanded="true" />
-                <element signature="e#705#722#0" expanded="true" />
-              </folding>
+            <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GaussEliminator.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GaussEliminator.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="132" selection-start="812" selection-end="812" vertical-scroll-proportion="0.0">
+            <state line="118" column="22" selection-start="4090" selection-end="4090" vertical-scroll-proportion="3.4169884">
               <folding />
             </state>
           </provider>
@@ -98,9 +96,7 @@
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="54" column="13" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,7 +113,7 @@
       <file leaf-file-name="ThompsonJacobian.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="41" selection-start="3248" selection-end="3248" vertical-scroll-proportion="0.0">
+            <state line="15" column="8" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,13 +161,13 @@
         <option value="$PROJECT_DIR$/src/test/TestAPData.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/GaussNewtonSolver/Matrix.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/GaussNewtonSolver/Jacobian.java" />
-        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/Residual.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonResidual.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/Jacobian.java" />
-        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
+        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java" />
+        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java" />
       </list>
     </option>
   </component>
@@ -207,16 +203,12 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WifiTracker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WifiTracker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -321,7 +313,20 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WifiTracker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WifiTracker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,41 +346,22 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="net.svamp.wifitracker" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.svamp.wifitracker.core" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Tests.AllTests">
-    <configuration default="false" name="APDataTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="WifiTracker" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.APDataTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -421,6 +407,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -446,24 +450,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -552,29 +538,8 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="AllTests" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="WifiTracker" />
-      <option name="TESTING_TYPE" value="1" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.APDataTest" />
-      <item index="1" class="java.lang.String" itemvalue="Android Application.WifiTracker" />
-      <item index="2" class="java.lang.String" itemvalue="Android Tests.AllTests" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Android Application.WifiTracker" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -632,11 +597,9 @@
     <frame x="-4" y="24" width="1374" height="727" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="96" y="124" width="1174" height="527" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6197917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -647,10 +610,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2473525" sideWeight="0.38020834" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28517398" sideWeight="0.38020834" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.024305556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="96" y="124" width="1174" height="527" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6197917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10069445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -747,14 +712,11 @@
         <state line="174" column="48" selection-start="4937" selection-end="4937" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/WifiAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="126" selection-start="906" selection-end="906" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0" />
+        <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/core/SignalDataPoint.java">
@@ -764,9 +726,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java">
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="132" selection-start="812" selection-end="812" vertical-scroll-proportion="0.0">
+        <state line="54" column="13" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -778,32 +740,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/WifiAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="126" selection-start="906" selection-end="906" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/ThompsonJacobian.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="41" selection-start="3248" selection-end="3248" vertical-scroll-proportion="0.0">
+        <state line="15" column="8" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java">
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussEliminator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="13" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="63" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.5254237">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#560#569#0" expanded="true" />
-            <element signature="e#705#722#0" expanded="true" />
-          </folding>
+        <state line="118" column="22" selection-start="4090" selection-end="4090" vertical-scroll-proportion="3.4169884">
+          <folding />
         </state>
       </provider>
     </entry>
