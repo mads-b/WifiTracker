@@ -28,7 +28,9 @@ public class ThompsonJacobian implements Jacobian {
 
 	@Override
 	public double get (int row, int col) throws IllegalArgumentException {
-		if(row>=jacobian.length || col>=3) throw new IllegalArgumentException("Tried to access element in Jacobian out of bounds!");
+		if(row>=jacobian.length || col>=3)
+			throw new IllegalArgumentException("Tried to access element in Jacobian out of bounds! " +
+					"Tried to fetch element "+row+"x"+col+" from a "+getRowSize()+"x"+getColSize()+" matrix.");
 		return jacobian[row][col];
 	}
 
@@ -83,11 +85,10 @@ public class ThompsonJacobian implements Jacobian {
 			//df/dy:
 			jacobian[row][1] = (10*n/ln10)*((y-yi)/riSq - (y-y1)/r1Sq);
 			//df/dn:
-			jacobian[row][2] = (10/ln10)*Math.log(Math.sqrt(r1Sq/riSq));
+			jacobian[row][2] = (10/ln10)* Math.log(Math.sqrt(riSq / r1Sq));
 
 			//Compute the residuals for all these DRSS expressions. Formula is the DRSS in Thompson.
-			residuals[row] = 10*n*Math.log10(Math.sqrt(riSq/r1Sq))+curPoint.getSignalStrength()-firstPoint.getSignalStrength();
-
+			residuals[row] = firstPoint.getSignalStrength()-curPoint.getSignalStrength()-10*n*Math.log10(Math.sqrt(riSq / r1Sq));
 
 			row++;
 		}

@@ -1,7 +1,10 @@
 package net.svamp.wifitracker.solver;
 
+import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.SignalDataPoint;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -22,9 +25,16 @@ public class GaussNewtonSolver {
 	public double[] solve(double[] curEstimate,int iterationNum) {
 		//Iterate the provided number of times.
 		for(int i=0;i<iterationNum;i++) {
+			//Remember to input next guess!
+			J.setNewEstimates(curEstimate);
+
 			double[][] leftEq = getJTransposeTimesJ();
 			double[] rightEq = getJTransposeTimesResidual();
-			curEstimate = GaussEliminator.solve(leftEq,rightEq);
+			double[] newEstimate = GaussEliminator.solve(leftEq,rightEq);
+
+			for(int n=0;n<curEstimate.length;n++) {
+				curEstimate[n] += newEstimate[n];
+			}
 		}
 		return curEstimate;
 	}
@@ -38,8 +48,8 @@ public class GaussNewtonSolver {
 		double[][] result = new double[J.getColSize()][J.getColSize()];
 		/*Iterate over the upper triangle in the result matrix.
 		 */
-		for(int col = 0;col<result.length;col++) {
-			for(int row = col;row<result.length;row++) {
+		for(int row = 0; row<result.length;row++) {
+			for(int col = row ; col<result.length; col++) {
 				//Iterate (sum) the elements required to perform a complete matrix multiplication
 				for(int i=0;i<J.getRowSize();i++) {
 					result[row][col] += J.get(i,row)*J.get(i,col);
@@ -58,15 +68,30 @@ public class GaussNewtonSolver {
 	}
 
 	private double[] getJTransposeTimesResidual() {
-		double[] result = new double[J.getRowSize()];
+		double[] result = new double[J.getColSize()];
 		//Iterate over all result entries
 		for(int i=0;i<result.length;i++) {
 			//Iterate over all row entries in jacobian (column entries in its transpose)
 			for(int j=0;j<J.getRowSize();j++) {
-				result[i] += result[j]*J.get(j,i);
+				result[i] += J.getResidual(j)*J.get(j,i);
 			}
 		}
 		return result;
 	}
 
+
+	public static void main(String[] args) {
+		ArrayList<SignalDataPoint> testPoints = new ArrayList<SignalDataPoint>();
+		testPoints.add(new SignalDataPoint(new LatLon(1,1),-5.4));
+		testPoints.add(new SignalDataPoint(new LatLon(5,10),-4.5));
+		testPoints.add(new SignalDataPoint(new LatLon(2,6),-1));
+		testPoints.add(new SignalDataPoint(new LatLon(6,5),-3.2));
+		testPoints.add(new SignalDataPoint(new LatLon(3,3),-3));
+		testPoints.add(new SignalDataPoint(new LatLon(4,5),-1.4));
+		GaussNewtonSolver solver = new GaussNewtonSolver(testPoints);
+		double[] curEstimate = {4,4,1.5};
+		solver.solve(curEstimate,100);
+		System.out.println(Arrays.toString(curEstimate));
+
+	}
 }
