@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.WifiItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class CardListener {
@@ -21,8 +21,8 @@ public class CardListener {
     private final WifiProcessor wifiProcessor;
     private final LocationProcessor locationProcessor;
     private final CompassProcessor compassProcessor;
-    //Mapping from BSSID to APData object, which contains all datapoints related to this AP.
-    private final HashMap<String,APData> apData = new HashMap<String,APData>();
+    //Mapping from BSSID to APDataStore object, which contains all datapoints related to this AP.
+    private final Map<String,APDataStore> apDataStores = new HashMap<String,APDataStore>();
     //Handlers to send change messages to.
     private final ArrayList<Handler> handlers = new ArrayList<Handler>();
     //Last known location. Set only on good accuracy.
@@ -77,33 +77,20 @@ public class CardListener {
 
         Log.d("GPS LOCATION FOUND", "Found GPS location and merging data.");
         for(WifiItem item : foundWifi) {
-            APData ap;
+            APDataStore apStore;
             //New AP found. Make new dataset
-            if(!apData.containsKey(item.bss))
-                ap = new APData(item.ssid);
+            if(!apDataStores.containsKey(item.bss))
+                apStore = new APDataStore(item,this);
                 //Existing found. Get dataset and add new info
             else
-                ap = apData.get(item.bss);
+                apStore = apDataStores.get(item.bss);
 
 
-            ap.addData(lastLocation, item.level);
-            apData.put(item.bss, ap);
+            apStore.addData(lastLocation, item.level);
+            apDataStores.put(item.bss, apStore);
 
-            if(apData.get(item.bss).getDataSize()>9) {
-                LatLon apPosition = apData.get(item.bss).getApPosition();
-                Location loc = new Location("pp");
-                loc.setLongitude(apPosition.getLon());
-                loc.setLatitude(apPosition.getLat());
-                Bundle b=new Bundle();
-                b.putBoolean("newAPPointData", true);
-                b.putString("apName", item.ssid);
-                b.putDouble("apDistance", lastLocation.distanceTo(loc));
-                b.putDouble("apBearing", lastLocation.bearingTo(loc));
-                b.putDouble("apLatitude", loc.getLatitude());
-                b.putDouble("apLongitude", loc.getLongitude());
-                Message m=new Message();
-                m.setData(b);
-                sendMessage(m);
+            if(apDataStores.get(item.bss).getDataSize()>9) {
+                apDataStores.get(item.bss).computeApPosition();
             }
         }
 
@@ -181,9 +168,30 @@ public class CardListener {
 
     public int getNumberOfDataPoints() {
         int i=0;
-        for(APData a : apData.values()) {
+        for(APDataStore a : apDataStores.values()) {
             i+=a.getDataSize();
         }
         return i;
+    }
+
+    /**
+     * Callback method from APDataStore to notify this object when its AP position has been estimated.
+     * This method takes this new data, bundles it, and sends it as an Android message
+     * @param apStore The APDataStore
+     */
+    public void fireApPositionComputed(APDataStore apStore) {
+        Location loc = new Location("pp");
+        loc.setLongitude(apStore.getWifiItem().location.getLon());
+        loc.setLatitude(apStore.getWifiItem().location.getLat());
+        Bundle b=new Bundle();
+        b.putBoolean("newAPPointData", true);
+        b.putString("apName", apStore.getWifiItem().ssid);
+        b.putDouble("apDistance", lastLocation.distanceTo(loc));
+        b.putDouble("apBearing", lastLocation.bearingTo(loc));
+        b.putDouble("apLatitude", loc.getLatitude());
+        b.putDouble("apLongitude", loc.getLongitude());
+        Message m=new Message();
+        m.setData(b);
+        sendMessage(m);
     }
 }

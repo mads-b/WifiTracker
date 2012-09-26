@@ -13,6 +13,8 @@ public class WifiItem {
     public int level;
     public String bss;
 
+    //Set by APDataStore when it manages to compute its location.
+    public LatLon location;
 
     /**
      * @return The drawable.id of an image that represents the security of a given {@link WifiItem}.

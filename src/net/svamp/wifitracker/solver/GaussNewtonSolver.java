@@ -92,6 +92,5 @@ public class GaussNewtonSolver {
         double[] curEstimate = {4,4,1.5};
         solver.solve(curEstimate,100);
         System.out.println(Arrays.toString(curEstimate));
-
     }
 }

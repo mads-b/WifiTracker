@@ -5,25 +5,27 @@ import android.location.Location;
 import android.util.Log;
 import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.SignalDataPoint;
+import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.solver.GaussNewtonSolver;
 
 import java.util.ArrayList;
 
-public class APData {
-    //Number of points to use for every estimate of direction to AP.
-    private final int pointsInDirEstimate = 5;
-    private final String SSID;
+public class APDataStore extends Thread {
+
+    private final WifiItem wifiItem;
     //Number of datapoints in this location. Using this for increased computation speed.
     private final ArrayList<Integer> points = new ArrayList<Integer>();
     //Data points. x and y are latitude and longitude, z is signal strength.
     private final ArrayList<SignalDataPoint> coords = new ArrayList<SignalDataPoint>();
+    private final CardListener apPositionListener;
 
-    public APData(String SSID) {
-        this.SSID = SSID;
+    public APDataStore (WifiItem wifiItem, CardListener apPositionListener) {
+        this.wifiItem=wifiItem;
+        this.apPositionListener=apPositionListener;
     }
 
     /**
-     * Adds new data point to the APData store.
+     * Adds new data point to the APDataStore store.
      * If the location is further than LocationProcessor.minAccuracy meters away,
      * the data point is simply added. If the new data point is closer than this
      * to any existing data point, these data points are merged and their signal strengths averaged.
@@ -70,20 +72,8 @@ public class APData {
      * @see net.svamp.wifitracker.solver.ThompsonJacobian
      * @return A point in space where the AP described by this object i estimated to be.
      */
-    public LatLon getApPosition() {
-        //First, we need some initial values (estimates)
-        //Path loss exponent. Thompson had the best result with 1.72.
-        final double n0 = 1.72;
-        //Make our estimate of AP position the mean value of all our data points! This is necessary, as a bad initial guess leads to a diverging solution.
-        LatLon initialEstimate = SignalDataPoint.getCentroid(coords);
-        //Simplicity assumption: On this scale, latitude and longitude are orthogonal
-        final double x0 = initialEstimate.getLon();
-        final double y0 = initialEstimate.getLat();
-        double[] solutionVector = {x0,y0,n0};
-
-        GaussNewtonSolver solver = new GaussNewtonSolver(coords);
-        solutionVector = solver.solve(solutionVector,5);
-        return new LatLon(solutionVector[1],solutionVector[0]);
+    public void computeApPosition () {
+        this.start();
     }
 
     /**
@@ -95,11 +85,11 @@ public class APData {
     }
 
     /**
-     * Fetches the SSID of the AP this instance is storing data points for
-     * @return SSID
+     * Fetches the WifiItem of the AP this instance is storing data points for
+     * @return WifiItem containing all the details of this AP.
      */
-    public String getSSID() {
-        return SSID;
+    public WifiItem getWifiItem() {
+        return wifiItem;
     }
 
 
@@ -120,6 +110,25 @@ public class APData {
                 Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         return R * c;
+    }
 
+    @Override
+    public void run() {
+        //First, we need some initial values (estimates)
+        //Path loss exponent. Thompson had the best result with 1.72.
+        final double n0 = 1.72;
+        //Make our estimate of AP position the mean value of all our data points! This is necessary, as a bad initial guess leads to a diverging solution.
+        LatLon initialEstimate = SignalDataPoint.getCentroid(coords);
+        //Simplicity assumption: On this scale, latitude and longitude are orthogonal
+        final double x0 = initialEstimate.getLon();
+        final double y0 = initialEstimate.getLat();
+        double[] solutionVector = {x0,y0,n0};
+
+        GaussNewtonSolver solver = new GaussNewtonSolver(coords);
+        solutionVector = solver.solve(solutionVector,5);
+        //Input solution into WifiItem
+        wifiItem.location = new LatLon(solutionVector[1],solutionVector[0]);
+
+        apPositionListener.fireApPositionComputed(this);
     }
 }
