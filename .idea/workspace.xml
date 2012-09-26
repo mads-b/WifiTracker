@@ -16,10 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="271580a6-2cad-4ea2-83ef-b8921ada693d" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/solver/GaussNewtonSolver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" />
     </list>
     <ignored path="WifiTracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -117,10 +114,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CardListener.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CardListener.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="16" selection-start="5046" selection-end="5046" vertical-scroll-proportion="0.33333334">
+            <state line="168" column="22" selection-start="5398" selection-end="5398" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#741#761#0" expanded="true" />
@@ -142,10 +139,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="APDataStore.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="APDataStore.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="54" selection-start="5624" selection-end="5624" vertical-scroll-proportion="0.0">
+            <state line="135" column="9" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.6814672">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#542#551#0" expanded="true" />
@@ -197,7 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/CompassActivity.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/WifiProcessor.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/core/LatLon.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/GpsStatusListener.java" />
@@ -213,6 +209,7 @@
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/APData.java" />
         <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" />
+        <option value="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" />
       </list>
     </option>
   </component>
@@ -873,24 +870,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="54" selection-start="5624" selection-end="5624" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#542#551#0" expanded="true" />
-            <element signature="e#699#716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="16" selection-start="5046" selection-end="5046" vertical-scroll-proportion="0.33333334">
+        <state line="168" column="22" selection-start="5398" selection-end="5398" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#741#761#0" expanded="true" />
             <element signature="e#869#878#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="9" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.6814672">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#542#551#0" expanded="true" />
+            <element signature="e#699#716#0" expanded="true" />
           </folding>
         </state>
       </provider>

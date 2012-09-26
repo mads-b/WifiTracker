@@ -114,16 +114,26 @@ public class APDataStore extends Thread {
 
     @Override
     public void run() {
+        //Vector on the format {x0,y0,n0};
+        double[] solutionVector = new double[3];
+
         //First, we need some initial values (estimates)
         //Path loss exponent. Thompson had the best result with 1.72.
-        final double n0 = 1.72;
-        //Make our estimate of AP position the mean value of all our data points! This is necessary, as a bad initial guess leads to a diverging solution.
-        LatLon initialEstimate = SignalDataPoint.getCentroid(coords);
-        //Simplicity assumption: On this scale, latitude and longitude are orthogonal
-        final double x0 = initialEstimate.getLon();
-        final double y0 = initialEstimate.getLat();
-        double[] solutionVector = {x0,y0,n0};
+        solutionVector[2] = 1.72;
 
+        //We have not computed this AP's location before.. Take a guess at its position!
+        if(wifiItem.location==null) {
+            //Make our estimate of AP position the mean value of all our data points! This is necessary, as a bad initial guess leads to a diverging solution.
+            LatLon initialEstimate = SignalDataPoint.getCentroid(coords);
+            //Simplicity assumption: On this scale, latitude and longitude are orthogonal
+            solutionVector[0] = initialEstimate.getLon();
+            solutionVector[1] = initialEstimate.getLat();
+        }
+        //We have a previous computation! Use it to improve the initial guess.
+        else {
+            solutionVector[0]= wifiItem.location.getLon();
+            solutionVector[1]= wifiItem.location.getLat();
+        }
         GaussNewtonSolver solver = new GaussNewtonSolver(coords);
         solutionVector = solver.solve(solutionVector,5);
         //Input solution into WifiItem
