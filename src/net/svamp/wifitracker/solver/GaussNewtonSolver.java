@@ -15,7 +15,7 @@ import java.util.Collection;
  * This algorithm should have an abstract twin, but I'm too lazy to think about reusability now.
  */
 public class GaussNewtonSolver {
-    private Jacobian J;
+    private final Jacobian J;
 
 
     public GaussNewtonSolver(Collection<SignalDataPoint> dataPoints) {

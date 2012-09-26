@@ -2,7 +2,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="net.svamp.wifitracker" android:debuggable="true">
-	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="9"></uses-sdk>
+	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7"></uses-sdk>
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -21,8 +21,9 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="CompassActivity"></activity>
+		<activity android:name="SettingsActivity"></activity>
 		<activity android:name="TrackerMapActivity"></activity>
-		<activity android:name="TracerTabWidget" android:theme="@android:style/Theme.NoTitleBar"></activity>
+		<activity android:name=".TracerTabHost" android:theme="@android:style/Theme.NoTitleBar"></activity>
 	</application>
 </manifest>
  

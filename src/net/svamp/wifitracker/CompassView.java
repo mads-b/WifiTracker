@@ -19,8 +19,8 @@ public class CompassView extends View{
     private Point3D center;
     private double angle;
 
-    private ArrayList<Point3D> points = new ArrayList<Point3D>();
-    private ArrayList<String> pointNames = new ArrayList<String>();
+    private final ArrayList<Point3D> points = new ArrayList<Point3D>();
+    private final ArrayList<String> pointNames = new ArrayList<String>();
     public CompassView(Context context) {
         super( context);
     }

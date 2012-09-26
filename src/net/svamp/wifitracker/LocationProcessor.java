@@ -12,17 +12,15 @@ import android.widget.Toast;
 
 public class LocationProcessor implements LocationListener {
     //Accuracy in meters. All datapoints within this radius of each other is defined to be the same point.
-    public static int minAccuracy=10;
+    public static final int minAccuracy=10;
     private boolean displayedLocationProviderSelectionScreen = false;
-    GpsStatus status = null;
+    final GpsStatus status = null;
     private LocationManager locationManager;
-    private float minDistance=0;
-    private long minTime=1;
     private String provider;
     private Location lastLocation;
-    private GpsStatusListener gpsStatusListener;
-    private CardListener listener;
-    private Activity activity;
+    private final GpsStatusListener gpsStatusListener;
+    private final CardListener listener;
+    private final Activity activity;
 
 
     public LocationProcessor(Activity ac, CardListener listener) {
@@ -57,6 +55,8 @@ public class LocationProcessor implements LocationListener {
     }
     public void startProvider() {
         // Requesting updates
+        float minDistance = 0;
+        long minTime = 1;
         locationManager.requestLocationUpdates(provider, minTime, minDistance,this);
     }
 

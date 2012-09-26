@@ -47,7 +47,7 @@ public final class R {
         public static final int compass_activity=0x7f030000;
         public static final int main_activity=0x7f030001;
         public static final int map_activity=0x7f030002;
-        public static final int settings_activity=0x7f030003;
+        public static final int settings_screen=0x7f030003;
         public static final int tracer_tabs=0x7f030004;
         public static final int wifi_list_item=0x7f030005;
     }

@@ -8,15 +8,13 @@ import android.location.LocationManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.Iterator;
-
 public class GpsStatusListener implements GpsStatus.Listener{
 
-    private LocationManager locationManager;
+    private final LocationManager locationManager;
     private GpsStatus gpsStatus;
     private int satsAvailable=0;
-    private Activity activity;
-    private CardListener listener;
+    private final Activity activity;
+    private final CardListener listener;
     public GpsStatusListener(Activity ac,LocationManager l,CardListener listener) {
         this.locationManager=l;
         this.activity=ac;
@@ -28,9 +26,7 @@ public class GpsStatusListener implements GpsStatus.Listener{
             case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
                 gpsStatus = locationManager.getGpsStatus(gpsStatus);
                 int sat_counter = 0;
-                Iterator<GpsSatellite> it = gpsStatus.getSatellites().iterator();
-                while (it.hasNext()) {
-                    it.next();
+                for (GpsSatellite gpsSatellite : gpsStatus.getSatellites()) {
                     sat_counter++;
                 }
                 satsAvailable = sat_counter;

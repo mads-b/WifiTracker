@@ -16,16 +16,16 @@ import net.svamp.wifitracker.core.WifiNetworkList;
 import java.util.List;
 
 public class WifiProcessor extends BroadcastReceiver {
-    private Activity activity;
-    private WifiManager wifiManager;
-    private CardListener listener;
+    private final Activity activity;
+    private final WifiManager wifiManager;
+    private final CardListener listener;
     private boolean running;
     private List<WifiItem> lastResult;
 
     public WifiProcessor(Activity activity, CardListener s) {
         this.activity=activity;
         this.listener=s;
-        this.wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);;
+        this.wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
     }
 
     public void initializeProvider() {
@@ -47,10 +47,7 @@ public class WifiProcessor extends BroadcastReceiver {
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
     public void startScan() {
         //Initiate listening for scan results

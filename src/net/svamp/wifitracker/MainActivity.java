@@ -16,9 +16,6 @@ public class MainActivity extends Activity implements OnClickListener {
     WifiAdapter adapter;
     WifiProcessor processor;
 
-    public MainActivity() {
-    }
-
     /** Called with the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +35,10 @@ public class MainActivity extends Activity implements OnClickListener {
         Button helpButton = (Button) findViewById(R.id.button_help);
         helpButton.setOnClickListener(this);
 
+        //Settings button
+        Button settingsButton = (Button) findViewById(R.id.button_settings);
+        settingsButton.setOnClickListener(this);
+
         //Record buttons
         Button recordSelectedButton = (Button) findViewById(R.id.button_record_selected);
         recordSelectedButton.setOnClickListener(this);
@@ -45,16 +46,6 @@ public class MainActivity extends Activity implements OnClickListener {
         Button recordAllButton = (Button) findViewById(R.id.button_record_all);
         recordAllButton.setOnClickListener(this);
     }
-
-
-    /**
-     * Called when the activity is about to start interacting with the user.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 
     public void onWifiListGet() {
         //Stop sniffing
@@ -83,6 +74,11 @@ public class MainActivity extends Activity implements OnClickListener {
                         .setPositiveButton(R.string.button_help_close, null);
                 builder.create().show();
                 break;
+            //Settings button
+            case R.id.button_settings:
+                intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
+                break;
             //Button for recording selected AP's selected
             case R.id.button_record_selected:
 
@@ -98,7 +94,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 b = new Bundle();
                 b.putBoolean("hasSelection", false);
 
-                intent = new Intent(MainActivity.this, TracerTabWidget.class);
+                intent = new Intent(MainActivity.this, TracerTabHost.class);
                 intent.putExtras(b);
                 startActivity(intent);
                 break;

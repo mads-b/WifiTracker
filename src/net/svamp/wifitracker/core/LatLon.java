@@ -20,9 +20,9 @@ public class LatLon {
         double accLat=0;
         double accLon=0;
 
-        for(int i=0;i<coords.length;i++) {
-            accLat+=coords[i].getLat();
-            accLon+=coords[i].getLon();
+        for (LatLon coord : coords) {
+            accLat += coord.getLat();
+            accLon += coord.getLon();
         }
         return new LatLon(accLat/coords.length,accLon/coords.length);
     }

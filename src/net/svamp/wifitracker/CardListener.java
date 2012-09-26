@@ -18,13 +18,13 @@ import java.util.List;
 
 public class CardListener {
     //Processes used to harvest sensor data
-    private WifiProcessor wifiProcessor;
-    private LocationProcessor locationProcessor;
-    private CompassProcessor compassProcessor;
+    private final WifiProcessor wifiProcessor;
+    private final LocationProcessor locationProcessor;
+    private final CompassProcessor compassProcessor;
     //Mapping from BSSID to APData object, which contains all datapoints related to this AP.
-    private HashMap<String,APData> apData = new HashMap<String,APData>();
+    private final HashMap<String,APData> apData = new HashMap<String,APData>();
     //Handlers to send change messages to.
-    private ArrayList<Handler> handlers = new ArrayList<Handler>();
+    private final ArrayList<Handler> handlers = new ArrayList<Handler>();
     //Last known location. Set only on good accuracy.
     private Location lastLocation;
     //This is a singleton.

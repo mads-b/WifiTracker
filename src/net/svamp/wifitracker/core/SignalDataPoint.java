@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class SignalDataPoint {
 	private final LatLon coords;
-	private double signalStrength;
+	private final double signalStrength;
 
 	public SignalDataPoint(LatLon coords, double signalStrength) {
 		this.coords=coords;

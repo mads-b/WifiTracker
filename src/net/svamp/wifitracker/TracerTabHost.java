@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
-public class TracerTabWidget extends TabActivity {
+public class TracerTabHost extends TabActivity {
 
     private CardListener cardListener;
 

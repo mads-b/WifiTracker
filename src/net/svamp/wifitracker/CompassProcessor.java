@@ -10,13 +10,13 @@ import java.util.Arrays;
 
 public class CompassProcessor implements SensorEventListener {
     /* sensor data */
-    SensorManager m_sensorManager;
-    float []m_lastMagFields = new float[3];
-    float []m_lastAccels = new float[3];
-    private float[] m_rotationMatrix = new float[16];
-    private float[] m_orientation = new float[4];
+    final SensorManager m_sensorManager;
+    final float []m_lastMagFields = new float[3];
+    final float []m_lastAccels = new float[3];
+    private final float[] m_rotationMatrix = new float[16];
+    private final float[] m_orientation = new float[4];
 
-    DecayingAverageFilter m_filter = new DecayingAverageFilter();
+    final DecayingAverageFilter m_filter = new DecayingAverageFilter();
 
 
 
@@ -58,7 +58,7 @@ public class CompassProcessor implements SensorEventListener {
      */
     private class MovingAverageFilter {
         static final int AVERAGE_BUFFER = 20;
-        float[] m_arr = new float[AVERAGE_BUFFER];
+        final float[] m_arr = new float[AVERAGE_BUFFER];
         int m_idx = 0;
         float lastVal=0;
 

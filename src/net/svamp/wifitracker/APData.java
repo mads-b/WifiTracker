@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class APData {
     //Number of points to use for every estimate of direction to AP.
     private final int pointsInDirEstimate = 5;
-    private String SSID;
+    private final String SSID;
     //Number of datapoints in this location. Using this for increased computation speed.
-    private ArrayList<Integer> points = new ArrayList<Integer>();
+    private final ArrayList<Integer> points = new ArrayList<Integer>();
     //Data points. x and y are latitude and longitude, z is signal strength.
-    private ArrayList<SignalDataPoint> coords = new ArrayList<SignalDataPoint>();
+    private final ArrayList<SignalDataPoint> coords = new ArrayList<SignalDataPoint>();
 
     public APData(String SSID) {
         this.SSID = SSID;

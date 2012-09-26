@@ -9,9 +9,9 @@ import java.util.Iterator;
  * This class represents the Jacobian matrix specified in the paper Thompson(2009) et.al.
  */
 public class ThompsonJacobian implements Jacobian {
-    private double[][] jacobian;
-    private double[] residuals;
-    private Collection<SignalDataPoint> dataPoints;
+    private final double[][] jacobian;
+    private final double[] residuals;
+    private final Collection<SignalDataPoint> dataPoints;
 
     //ln(10) is used OFTEN! make sure we calculate it once.
     private final static double ln10 = Math.log(10);
@@ -70,14 +70,14 @@ public class ThompsonJacobian implements Jacobian {
 
 
         //Distance between data point and estimated AP position squared.
-        final double r1Sq = square(x1-x)+square(y1-y); // r_1, squared
+        final double r1Sq = square(x1 - x)+square(y1-y); // r_1, squared
 
         int row=1;
         while(iterator.hasNext()) {
             curPoint = iterator.next();
             double xi = curPoint.getCoords().getLon();
             double yi = curPoint.getCoords().getLat();
-            double riSq = square(xi-x)+square(yi-y); //r_i, squared.
+            double riSq = square(xi-x)+square(yi - y); //r_i, squared.
 
             /*Recompute the jacobian here! All differentiations are differentiations on the DRSS function in Thompson.*/
             //df/dx:

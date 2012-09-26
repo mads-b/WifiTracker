@@ -32,7 +32,7 @@ public class CompassActivity extends Activity {
                 if(msg.getData().get("dataPointNum")!=null)
                     dataPointNumField.setText("Data Points Found: "+msg.getData().getInt("dataPointNum"));
                 if(msg.getData().get("gps_accurate")!=null)
-                    if(msg.getData().getBoolean("gps_accurate")==true)
+                    if(msg.getData().getBoolean("gps_accurate"))
                         gpsAccurate.setText("GPS fix accurate: YES");
                     else
                         gpsAccurate.setText("GPS fix accurate: NO");

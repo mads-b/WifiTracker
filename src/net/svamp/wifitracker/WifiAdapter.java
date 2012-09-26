@@ -18,20 +18,20 @@ import java.util.List;
 
 public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
     private List<WifiItem> results = new ArrayList<WifiItem>();
-    private List<View> listItems = new ArrayList<View>();
-    private List<Boolean> clicked = new ArrayList<Boolean>();
+    private final List<View> listItems = new ArrayList<View>();
+    private final List<Boolean> clicked = new ArrayList<Boolean>();
 
     public WifiAdapter(Context context, List<WifiItem> results) {
         this.results = results;
         View convertView;
-        for(int i=0;i<results.size();i++) {
+        for (WifiItem result : results) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.wifi_list_item, null);
             ImageView wifiLogo = (ImageView) convertView.findViewById(R.id.encryption_logo);
-            wifiLogo.setImageResource(results.get(i).getDrawableId());
+            wifiLogo.setImageResource(result.getDrawableId());
             TextView wifiName = (TextView) convertView.findViewById(R.id.wifi_name);
-            wifiName.setText(results.get(i).ssid);
+            wifiName.setText(result.ssid);
             clicked.add(false);
             listItems.add(convertView);
         }
@@ -58,7 +58,7 @@ public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
 
 
     public long getItemId(int arg0) {
-        return results.indexOf(arg0);
+        return 0;
     }
 
 
