@@ -1,4 +1,4 @@
- 
+
 package net.svamp.wifitracker;
 
 import android.app.Activity;
@@ -11,40 +11,40 @@ import android.widget.Toast;
 import java.util.Iterator;
 
 public class GpsStatusListener implements GpsStatus.Listener{
-	
-	private LocationManager locationManager;
-	private GpsStatus gpsStatus;
-	private int satsAvailable=0;
-	private Activity activity;
-	private CardListener listener;
-	public GpsStatusListener(Activity ac,LocationManager l,CardListener listener) {
-		this.locationManager=l;
-		this.activity=ac;
-		this.listener = listener;
-	}
-	
-	public void onGpsStatusChanged(int event) {
-		switch (event) {
-		case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-			gpsStatus = locationManager.getGpsStatus(gpsStatus);
-			int sat_counter = 0;
-			Iterator<GpsSatellite> it = gpsStatus.getSatellites().iterator();
-			while (it.hasNext()) {
-				it.next();
-				sat_counter++;
-			}
-			satsAvailable = sat_counter;
-			listener.onSatNumChanged(satsAvailable);
-			System.out.println(satsAvailable+" satellites found");
 
-			break;
-		case GpsStatus.GPS_EVENT_STARTED:
+    private LocationManager locationManager;
+    private GpsStatus gpsStatus;
+    private int satsAvailable=0;
+    private Activity activity;
+    private CardListener listener;
+    public GpsStatusListener(Activity ac,LocationManager l,CardListener listener) {
+        this.locationManager=l;
+        this.activity=ac;
+        this.listener = listener;
+    }
 
-			break;
-		case GpsStatus.GPS_EVENT_FIRST_FIX:
-			Toast.makeText(activity, R.string.first_gps_fix, Toast.LENGTH_LONG).show();
-			Log.d("FIX GOTTEN","FIX GOTTEN WITH "+satsAvailable+" SATTELLITES");
-			break;
-		}
-	}
+    public void onGpsStatusChanged(int event) {
+        switch (event) {
+            case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
+                gpsStatus = locationManager.getGpsStatus(gpsStatus);
+                int sat_counter = 0;
+                Iterator<GpsSatellite> it = gpsStatus.getSatellites().iterator();
+                while (it.hasNext()) {
+                    it.next();
+                    sat_counter++;
+                }
+                satsAvailable = sat_counter;
+                listener.onSatNumChanged(satsAvailable);
+                System.out.println(satsAvailable+" satellites found");
+
+                break;
+            case GpsStatus.GPS_EVENT_STARTED:
+
+                break;
+            case GpsStatus.GPS_EVENT_FIRST_FIX:
+                Toast.makeText(activity, R.string.first_gps_fix, Toast.LENGTH_LONG).show();
+                Log.d("FIX GOTTEN","FIX GOTTEN WITH "+satsAvailable+" SATTELLITES");
+                break;
+        }
+    }
 }

@@ -8,34 +8,34 @@ import com.google.android.maps.OverlayItem;
 import java.util.ArrayList;
 
 public class MapItemizedOverlay extends ItemizedOverlay {
-	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-	private Context mContext;
-	
-	public MapItemizedOverlay(Drawable defaultMarker) {
-		super(boundCenterBottom(defaultMarker));
-		populate();
-	}
-	
-	public MapItemizedOverlay(Drawable defaultMarker, Context context) {
-		  super(defaultMarker);
-		  mContext = context;
-		  populate();
-		}
+    private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+    private Context mContext;
 
-	@Override
-	protected OverlayItem createItem(int i) {
-	  return mOverlays.get(i);
-	}
-	
-	public void addOverlay(OverlayItem overlay) {
-	    mOverlays.add(overlay);
-	    populate();
-	}
+    public MapItemizedOverlay(Drawable defaultMarker) {
+        super(boundCenterBottom(defaultMarker));
+        populate();
+    }
 
-	@Override
-	public int size() {
-		return mOverlays.size();
-	}
+    public MapItemizedOverlay(Drawable defaultMarker, Context context) {
+        super(defaultMarker);
+        mContext = context;
+        populate();
+    }
+
+    @Override
+    protected OverlayItem createItem(int i) {
+        return mOverlays.get(i);
+    }
+
+    public void addOverlay(OverlayItem overlay) {
+        mOverlays.add(overlay);
+        populate();
+    }
+
+    @Override
+    public int size() {
+        return mOverlays.size();
+    }
 //	@Override
 //	protected boolean onTap(int index) {
 //	  OverlayItem item = mOverlays.get(index);
