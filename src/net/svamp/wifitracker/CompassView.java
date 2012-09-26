@@ -81,7 +81,7 @@ public class CompassView extends View{
         }
 
         try {
-            Thread.sleep(100);
+            Thread.sleep(50);
             if(CardListener.getInstance()!=null)
                 angle=CardListener.getInstance().getCompassOrientation();
 
