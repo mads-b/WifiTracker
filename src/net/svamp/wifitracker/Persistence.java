@@ -14,5 +14,5 @@ public interface Persistence {
 
     Collection<APDataStore> fetchApData() throws FileNotFoundException;
 
-    APDataStore fetchApData(String bss);
+    APDataStore fetchApData(String bss) throws IOException;
 }

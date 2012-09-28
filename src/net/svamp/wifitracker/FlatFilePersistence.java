@@ -65,8 +65,10 @@ public class FlatFilePersistence implements Persistence {
         return new BufferedInputStream(new FileInputStream(f));
     }
 
-    private String streamToString(InputStream stream) {
-        return new Scanner(stream).useDelimiter("\\A").next();
+    private String streamToString(InputStream stream) throws IOException {
+        String s = new Scanner(stream).useDelimiter("\\A").next();
+        stream.close();
+        return s;
     }
 
 
@@ -74,32 +76,52 @@ public class FlatFilePersistence implements Persistence {
     public Collection<APDataStore> fetchApData () throws FileNotFoundException {
         ArrayList<APDataStore> apData = new ArrayList<APDataStore>();
         try {
-        if(useSdCard) {
-            //Iterate over all data files on sd card
-            for(String bss : new File(dataFolderName).list()) {
-                String jsonApDataPoints = streamToString(getInputStream(dataFolderName + bss,"ApDataPoints.dat"));
-                String jsonApInfo       = streamToString(getInputStream(dataFolderName + bss,"ApInfo.dat"));
-                apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+            if(useSdCard) {
+                //Iterate over all data files on sd card
+                for(String bss : new File(dataFolderName).list()) {
+                    String jsonApDataPoints = streamToString(getInputStream(dataFolderName + bss,"ApDataPoints.dat"));
+                    String jsonApInfo       = streamToString(getInputStream(dataFolderName + bss,"ApInfo.dat"));
+                    apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+                }
             }
-        }
-        //Iterate over private files.
-        for(String file : context.fileList()) {
-            if(file.endsWith("ApInfo.dat")) {
-                String bss = file.split("-")[0];
-                String jsonApDataPoints = streamToString(context.openFileInput(bss+"-ApDataPoints.dat"));
-                String jsonApInfo       = streamToString(context.openFileInput(file));
-                apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+            //Iterate over private files.
+            for(String file : context.fileList()) {
+                if(file.endsWith("ApInfo.dat")) {
+                    String bss = file.split("-")[0];
+                    String jsonApDataPoints = streamToString(context.openFileInput(bss+"-ApDataPoints.dat"));
+                    String jsonApInfo       = streamToString(context.openFileInput(file));
+                    apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+                }
             }
-        }
         } catch (JSONException e) {
             Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
+        } catch (IOException e) {
+            Log.e("IOException","File could not be read. "+e.getLocalizedMessage());
         }
 
         return apData;
     }
 
     @Override
-    public APDataStore fetchApData (String bss) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public APDataStore fetchApData (String bss) throws IOException {
+        String jsonApDataPoints="";
+        String jsonApInfo="";
+        if(useSdCard && new File(dataFolderName+bss).isDirectory()) {
+            jsonApDataPoints = streamToString(getInputStream(dataFolderName + bss,"ApDataPoints.dat"));
+            jsonApInfo       = streamToString(getInputStream(dataFolderName + bss,"ApInfo.dat"));
+        }
+        try {
+            jsonApDataPoints = streamToString(context.openFileInput(bss+"-ApDataPoints.dat"));
+            jsonApInfo       = streamToString(context.openFileInput(bss+"-ApInfo.dat"));
+        }
+        finally {
+            try {
+                if(jsonApDataPoints.length()!=0)
+                    return new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints));
+                else return null;
+            } catch (JSONException e) {
+                Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
+            } finally { return null; }
+        }
     }
 }

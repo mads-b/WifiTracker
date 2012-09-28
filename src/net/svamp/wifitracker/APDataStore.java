@@ -154,8 +154,11 @@ public class APDataStore extends Thread {
         apPositionListener.fireApPositionComputed(this);
     }
 
-    public JSONArray toJson() {
-        JSONArray json = new JSONArray(coords);
+    public JSONArray toJson() throws JSONException {
+        JSONArray json = new JSONArray();
+        for(SignalDataPoint s : coords) {
+            json.put(s.toJson());
+        }
         return json;
     }
 }

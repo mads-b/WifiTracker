@@ -16,14 +16,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="271580a6-2cad-4ea2-83ef-b8921ada693d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/CardListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/FlatFilePersistence.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/FlatFilePersistence.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/Persistence.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/Persistence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/LatLon.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/LatLon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/SignalDataPoint.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/SignalDataPoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java" afterPath="$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java" />
     </list>
     <ignored path="WifiTracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -97,7 +92,7 @@
       <file leaf-file-name="APDataStore.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="18" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0">
+            <state line="156" column="21" selection-start="6449" selection-end="6449" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#628#637#0" expanded="true" />
@@ -188,10 +183,10 @@
       <file leaf-file-name="FlatFilePersistence.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/FlatFilePersistence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="50" selection-start="3891" selection-end="3891" vertical-scroll-proportion="0.519774">
+            <state line="123" column="38" selection-start="5248" selection-end="5248" vertical-scroll-proportion="0.7175141">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2777#2790#0" expanded="true" />
+                <element signature="e#2842#2855#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -874,6 +869,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="21" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/WifiAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="17" selection-start="1902" selection-end="1902" vertical-scroll-proportion="0.0">
@@ -886,18 +890,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/core/WifiItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="21" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/APDataStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="18" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0">
+        <state line="156" column="21" selection-start="6449" selection-end="6449" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#628#637#0" expanded="true" />
@@ -908,10 +903,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/svamp/wifitracker/FlatFilePersistence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="50" selection-start="3891" selection-end="3891" vertical-scroll-proportion="0.519774">
+        <state line="123" column="38" selection-start="5248" selection-end="5248" vertical-scroll-proportion="0.7175141">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2777#2790#0" expanded="true" />
+            <element signature="e#2842#2855#0" expanded="true" />
           </folding>
         </state>
       </provider>
