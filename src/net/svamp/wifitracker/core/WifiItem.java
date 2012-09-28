@@ -1,6 +1,8 @@
 package net.svamp.wifitracker.core;
 
 import net.svamp.wifitracker.R;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WifiItem {
     //Constants for determining what icon this item should have.
@@ -11,7 +13,7 @@ public class WifiItem {
     public String features;
     public int freq;
     public int level;
-    public String bss;
+    public String bssid;
 
     //Set by APDataStore when it manages to compute its location.
     public LatLon location;
@@ -27,4 +29,17 @@ public class WifiItem {
         }
         return DRAWABLE_ID[5];
     }
+
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("ssid",ssid);
+        object.put("features",features);
+        object.put("freq",freq);
+        object.put("level",level);
+        object.put("bssid", bssid);
+        object.putOpt("location",location.toJson());
+        return object;
+    }
+
 } 

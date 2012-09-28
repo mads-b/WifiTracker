@@ -1,5 +1,8 @@
 package net.svamp.wifitracker.core;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -31,5 +34,12 @@ public class SignalDataPoint {
             accLon+=curPoint.getCoords().getLon();
         }
         return new LatLon(accLat/coords.size(),accLon/coords.size());
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("signalStrength",signalStrength);
+        json.put("coords",coords.toJson());
+        return json;
     }
 }

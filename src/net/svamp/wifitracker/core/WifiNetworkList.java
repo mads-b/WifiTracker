@@ -4,11 +4,12 @@ package net.svamp.wifitracker.core;
 import android.net.wifi.ScanResult;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 
-public class WifiNetworkList {
+public class WifiNetworkList implements Iterable<WifiItem> {
 
 
 
@@ -25,13 +26,24 @@ public class WifiNetworkList {
             item.features = sr.capabilities;
             item.freq = sr.frequency;
             item.level = sr.level;
-            item.bss = sr.BSSID;
+            item.bssid = sr.BSSID;
             // Save for later use
             mNetworkList.add(item);
         }
     }
     public List<WifiItem> getNetworkList() {
         return mNetworkList;
+    }
+
+    @Override
+    public Iterator<WifiItem> iterator () {
+        return mNetworkList.iterator();
+    }
+
+    public int size() { return mNetworkList.size(); }
+
+    public WifiItem get(int key) {
+        return mNetworkList.get(key);
     }
 
 }

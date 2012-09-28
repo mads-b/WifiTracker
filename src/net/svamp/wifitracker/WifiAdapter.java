@@ -11,17 +11,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import net.svamp.wifitracker.core.WifiItem;
+import net.svamp.wifitracker.core.WifiNetworkList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
-    private List<WifiItem> results = new ArrayList<WifiItem>();
+    private WifiNetworkList results = new WifiNetworkList();
     private final List<View> listItems = new ArrayList<View>();
     private final List<Boolean> clicked = new ArrayList<Boolean>();
 
-    public WifiAdapter(Context context, List<WifiItem> results) {
+    public WifiAdapter(Context context, WifiNetworkList results) {
         this.results = results;
         View convertView;
         for (WifiItem result : results) {
@@ -73,7 +74,7 @@ public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
         ArrayList<String> selected = new ArrayList<String>();
         for(int i=0;i<clicked.size();i++) {
             if(clicked.get(i))
-                selected.add(results.get(i).bss);
+                selected.add(results.get(i).bssid);
         }
         return selected;
     }

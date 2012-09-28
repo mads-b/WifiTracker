@@ -9,10 +9,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import net.svamp.wifitracker.core.WifiItem;
+import net.svamp.wifitracker.core.WifiNetworkList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -67,7 +67,7 @@ public class CardListener {
      * Make a location-signal strength pair here and pass it along to the data store if it is accurate enough.
      * @param foundWifi List of wifi networks in the vicinity.
      */
-    public void wifiScanFinished(List<WifiItem> foundWifi) {
+    public void wifiScanFinished(WifiNetworkList foundWifi) {
         //Must have a location to merge data with. Return if we don't
         if(lastLocation==null) { return; }
 
@@ -79,18 +79,18 @@ public class CardListener {
         for(WifiItem item : foundWifi) {
             APDataStore apStore;
             //New AP found. Make new dataset
-            if(!apDataStores.containsKey(item.bss))
+            if(!apDataStores.containsKey(item.bssid))
                 apStore = new APDataStore(item,this);
                 //Existing found. Get dataset and add new info
             else
-                apStore = apDataStores.get(item.bss);
+                apStore = apDataStores.get(item.bssid);
 
 
             apStore.addData(lastLocation, item.level);
-            apDataStores.put(item.bss, apStore);
+            apDataStores.put(item.bssid, apStore);
 
-            if(apDataStores.get(item.bss).getDataSize()>9) {
-                apDataStores.get(item.bss).computeApPosition();
+            if(apDataStores.get(item.bssid).getDataSize()>9) {
+                apDataStores.get(item.bssid).computeApPosition();
             }
         }
 

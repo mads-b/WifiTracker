@@ -7,6 +7,7 @@ import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.SignalDataPoint;
 import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.solver.GaussNewtonSolver;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -140,5 +141,10 @@ public class APDataStore extends Thread {
         wifiItem.location = new LatLon(solutionVector[1],solutionVector[0]);
 
         apPositionListener.fireApPositionComputed(this);
+    }
+
+    public JSONArray toJson() {
+        JSONArray json = new JSONArray(coords);
+        return json;
     }
 }

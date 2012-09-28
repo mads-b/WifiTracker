@@ -10,17 +10,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.core.WifiNetworkList;
-
-import java.util.List;
 
 public class WifiProcessor extends BroadcastReceiver {
     private final Activity activity;
     private final WifiManager wifiManager;
     private final CardListener listener;
     private boolean running;
-    private List<WifiItem> lastResult;
+    private WifiNetworkList lastResult;
 
     public WifiProcessor(Activity activity, CardListener s) {
         this.activity=activity;
@@ -70,11 +67,9 @@ public class WifiProcessor extends BroadcastReceiver {
 
         WifiNetworkList list = new WifiNetworkList();
         list.initialize(wifiManager.getScanResults());
-        // Code to execute when SCAN_RESULTS_AVAILABLE_ACTION event occurs
-        List<WifiItem> networkList = list.getNetworkList();
         if(listener!=null)
-            listener.wifiScanFinished(networkList); // Returns a <list> of scanResults
-        lastResult=networkList;
+            listener.wifiScanFinished(list); // Returns a <list> of scanResults
+        lastResult=list;
         //Start scanning again! Maybe a sleep is smart here, depending on scan speed. (1 second on most devices)
 
         //If current activity is mainactivity, draw the rest of the GUI..
@@ -94,7 +89,7 @@ public class WifiProcessor extends BroadcastReceiver {
 
         running=false;
     }
-    public List<WifiItem> getLastResult() {
+    public WifiNetworkList getLastResult() {
         return lastResult;
     }
     public boolean isRunning() { return running; }

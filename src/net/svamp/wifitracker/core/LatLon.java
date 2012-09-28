@@ -1,5 +1,8 @@
 package net.svamp.wifitracker.core;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Simple wrapper class for a latitude and a longitude coordinate.
  * This wrapper is immutable.
@@ -25,5 +28,12 @@ public class LatLon {
             accLon += coord.getLon();
         }
         return new LatLon(accLat/coords.length,accLon/coords.length);
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("lat",lat);
+        json.put("lon",lon);
+        return json;
     }
 }
