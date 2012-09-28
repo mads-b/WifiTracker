@@ -19,6 +19,12 @@ public class SignalDataPoint {
 		this.signalStrength=signalStrength;
 	}
 
+    public SignalDataPoint(JSONObject json) throws JSONException {
+        this.coords = new LatLon(json.getJSONObject("coords"));
+        this.signalStrength = json.getDouble("signalStrength");
+
+    }
+
 	public LatLon getCoords() { return coords; }
 	public double getSignalStrength() { return signalStrength; }
 

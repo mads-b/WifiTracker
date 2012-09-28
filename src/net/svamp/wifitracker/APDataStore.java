@@ -8,6 +8,8 @@ import net.svamp.wifitracker.core.SignalDataPoint;
 import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.solver.GaussNewtonSolver;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,11 +20,20 @@ public class APDataStore extends Thread {
     private final ArrayList<Integer> points = new ArrayList<Integer>();
     //Data points. x and y are latitude and longitude, z is signal strength.
     private final ArrayList<SignalDataPoint> coords = new ArrayList<SignalDataPoint>();
-    private final CardListener apPositionListener;
+    private CardListener apPositionListener;
 
-    public APDataStore (WifiItem wifiItem, CardListener apPositionListener) {
+    public APDataStore (WifiItem wifiItem) {
         this.wifiItem=wifiItem;
-        this.apPositionListener=apPositionListener;
+    }
+
+    public APDataStore (JSONObject wifiItem,JSONArray jsonArray) throws JSONException {
+        this.wifiItem = new WifiItem(wifiItem);
+        for(int i=0;i<jsonArray.length();i++)
+            this.coords.add(new SignalDataPoint((JSONObject) jsonArray.get(i)));
+    }
+
+    public void setListener(CardListener listener) {
+        apPositionListener=listener;
     }
 
     /**

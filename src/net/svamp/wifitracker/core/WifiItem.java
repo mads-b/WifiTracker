@@ -18,6 +18,15 @@ public class WifiItem {
     //Set by APDataStore when it manages to compute its location.
     public LatLon location;
 
+
+    public WifiItem(JSONObject json) throws JSONException {
+        ssid = json.getString("ssid");
+        features = json.getString("features");
+        freq = json.getInt("freq");
+        level = json.getInt("level");
+        bssid = json.getString("bssid");
+        location = new LatLon(json.getJSONObject("location"));
+    }
     /**
      * @return The drawable.id of an image that represents the security of a given {@link WifiItem}.
      */
@@ -33,12 +42,12 @@ public class WifiItem {
 
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("ssid",ssid);
+        object.put("ssid", ssid);
         object.put("features",features);
         object.put("freq",freq);
         object.put("level",level);
         object.put("bssid", bssid);
-        object.putOpt("location",location.toJson());
+        object.putOpt("location", location.toJson());
         return object;
     }
 

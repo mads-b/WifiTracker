@@ -79,8 +79,10 @@ public class CardListener {
         for(WifiItem item : foundWifi) {
             APDataStore apStore;
             //New AP found. Make new dataset
-            if(!apDataStores.containsKey(item.bssid))
-                apStore = new APDataStore(item,this);
+            if(!apDataStores.containsKey(item.bssid)) {
+                apStore = new APDataStore(item);
+                apStore.setListener(this);
+            }
                 //Existing found. Get dataset and add new info
             else
                 apStore = apDataStores.get(item.bssid);

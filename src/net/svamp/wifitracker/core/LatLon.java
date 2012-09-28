@@ -14,6 +14,11 @@ public class LatLon {
         this.lat=lat;
         this.lon=lon;
     }
+    public LatLon(JSONObject json) throws JSONException {
+        this.lat = json.getDouble("lat");
+        this.lon = json.getDouble("lon");
+    }
+
 
     public double getLat() { return lat; }
     public double getLon() { return lon; }
