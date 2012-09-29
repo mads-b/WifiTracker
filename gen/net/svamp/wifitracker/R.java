@@ -28,11 +28,12 @@ public final class R {
     }
     public static final class id {
         public static final int button_help=0x7f050006;
+        public static final int button_recompute=0x7f05000d;
         public static final int button_record_all=0x7f050009;
         public static final int button_record_selected=0x7f05000a;
         public static final int button_settings=0x7f050007;
         public static final int compass_canvas=0x7f050001;
-        public static final int encryption_logo=0x7f05000d;
+        public static final int encryption_logo=0x7f05000e;
         public static final int gps_accurate=0x7f050005;
         public static final int gps_satNum=0x7f050003;
         public static final int linearLayout1=0x7f050000;
@@ -41,7 +42,7 @@ public final class R {
         public static final int mainlayout=0x7f05000b;
         public static final int manager_data_points=0x7f050004;
         public static final int mapview=0x7f05000c;
-        public static final int wifi_name=0x7f05000e;
+        public static final int wifi_name=0x7f05000f;
     }
     public static final class layout {
         public static final int compass_activity=0x7f030000;
@@ -53,18 +54,19 @@ public final class R {
     }
     public static final class string {
         public static final int button_help=0x7f040004;
-        public static final int button_help_close=0x7f040006;
+        public static final int button_help_close=0x7f040007;
+        public static final int button_recompute=0x7f040005;
         public static final int button_record_all=0x7f040002;
         public static final int button_record_selected=0x7f040001;
         public static final int button_settings=0x7f040003;
-        public static final int data_point_num_field=0x7f04000b;
-        public static final int first_gps_fix=0x7f040009;
-        public static final int gps_disabled=0x7f040008;
-        public static final int help_text=0x7f04000d;
-        public static final int help_title=0x7f04000c;
-        public static final int sats_num_field=0x7f04000a;
-        public static final int wifi_disabled=0x7f040007;
-        public static final int wifi_listen_selection=0x7f040005;
+        public static final int data_point_num_field=0x7f04000c;
+        public static final int first_gps_fix=0x7f04000a;
+        public static final int gps_disabled=0x7f040009;
+        public static final int help_text=0x7f04000e;
+        public static final int help_title=0x7f04000d;
+        public static final int sats_num_field=0x7f04000b;
+        public static final int wifi_disabled=0x7f040008;
+        public static final int wifi_listen_selection=0x7f040006;
         /**  Simple strings. 
          */
         public static final int wifitracker_name=0x7f040000;

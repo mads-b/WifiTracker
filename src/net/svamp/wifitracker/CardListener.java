@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Singleton HW handler
+ */
 public class CardListener {
     //Processes used to harvest sensor data
     private final WifiProcessor wifiProcessor;
@@ -90,10 +92,6 @@ public class CardListener {
 
             apStore.addData(lastLocation, item.level);
             apDataStores.put(item.bssid, apStore);
-
-            if(apDataStores.get(item.bssid).getDataSize()>9) {
-                apDataStores.get(item.bssid).computeApPosition();
-            }
         }
 
         //Update all handlers as number of datapoints just changed
@@ -195,5 +193,12 @@ public class CardListener {
         Message m=new Message();
         m.setData(b);
         sendMessage(m);
+    }
+
+    public void fireRecomputeOrder() {
+        for(APDataStore store : apDataStores.values()) {
+            store.computeApPosition();
+        }
+
     }
 }

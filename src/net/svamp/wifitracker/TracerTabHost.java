@@ -4,9 +4,11 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
-public class TracerTabHost extends TabActivity {
+public class TracerTabHost extends TabActivity implements View.OnClickListener {
 
     private CardListener cardListener;
 
@@ -15,11 +17,10 @@ public class TracerTabHost extends TabActivity {
         //Start Cardlistener!
         cardListener = new CardListener(this);
         cardListener.start();
-
         setContentView(R.layout.tracer_tabs);
 
         Resources res = getResources(); // Resource object to get Drawables
-        TabHost tabHost = getTabHost();  // The activity TabHost
+        TabHost tabHost = this.getTabHost();  // The activity TabHost
         TabHost.TabSpec spec;  // Resusable TabSpec for each tab
         Intent intent;  // Reusable Intent for each tab
 
@@ -39,6 +40,9 @@ public class TracerTabHost extends TabActivity {
         //		.setContent(intent);
         //tabHost.addTab(spec);
         tabHost.setCurrentTab(0);
+
+        Button recomputeButton = (Button) findViewById(R.id.button_recompute);
+        recomputeButton.setOnClickListener(this);
     }
     protected void onPause() {
         super.onPause();
@@ -53,5 +57,13 @@ public class TracerTabHost extends TabActivity {
         cardListener.start();
     }
 
+    @Override
+    public void onClick (View view) {
+        if(view.getId()==R.id.button_recompute) {
+            cardListener.fireRecomputeOrder();
+
+
+        }
+    }
 }
  

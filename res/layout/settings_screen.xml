@@ -3,9 +3,16 @@
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
-	<CheckBoxPreference
-			android:key="pref_sync"
-			android:title="yolo"
-			android:summary="yolosum"
-			android:defaultValue="true" />
+	<PreferenceCategory
+			android:title="Compass settings">
+		<SeekBarPreference
+				android:key="fps"
+				android:title="Refresh rate"
+				android:summary="The refresh rate of the compass animation."
+				android:dialogMessage="Frames per second"
+				android:defaultValue="5"
+				android:text=" FPS"
+				android:max="30"
+				/>
+	</PreferenceCategory>
 </PreferenceScreen>

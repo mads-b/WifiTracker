@@ -18,6 +18,7 @@ public class WifiItem {
     //Set by APDataStore when it manages to compute its location.
     public LatLon location;
 
+    public WifiItem() {}
 
     public WifiItem(JSONObject json) throws JSONException {
         ssid = json.getString("ssid");
