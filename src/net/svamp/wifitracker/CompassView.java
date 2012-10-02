@@ -48,11 +48,8 @@ public class CompassView extends View{
         //Fetch FPS preference.
         fpsSetting = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassFPS",5);
         /*
-         * Initializes screen (sets center) and registers a handler for listening for new data points.
+         * Registers a handler for listening for new calculated AP positions.
          */
-        center=new Point3D(getLeft()+getWidth()/2,
-                getTop()+getHeight()/2);
-        smallestRad = Math.min(getWidth()/2-10, getHeight()/2-10);
 
         Handler cvHandle = new Handler(){
             @Override
@@ -90,6 +87,13 @@ public class CompassView extends View{
 
     @Override
     protected void onDraw(Canvas canvas){
+        //View has evaluated its size. Set pixel values for center of screen and if height or width of screen dominates.
+        if(center == null) {
+            center=new Point3D(getLeft()+getWidth()/2,
+                    getTop()+getHeight()/2);
+            smallestRad = Math.min(getWidth()/2-10, getHeight()/2-10);
+        }
+
         try {
             //Sleep to synch FPS.
             Thread.sleep(1000/fpsSetting);
