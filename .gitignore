@@ -1,0 +1,15 @@
+*.class
+
+# IntelliJ metafiles
+*.iml
+*.ipr
+*.iws
+.sonar*
+
+.settings/
+.classpath
+.project
+.idea/
+
+bin/
+out/

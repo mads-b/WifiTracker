@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:baardsgaard="http://baardsgaard.com"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	<PreferenceCategory
+			android:title="Compass settings">
+		<net.svamp.wifitracker.SeekBarPreference
+				android:key="compassFPS"
+				android:title="Render refresh speed"
+				android:summary="Adjust compass visual FPS"
+				android:defaultValue="10"
+				android:max="40"
+				baardsgaard:min="0"
+				baardsgaard:unitsLeft=""
+				baardsgaard:unitsRight="FPS"/>
+	</PreferenceCategory>
+
+	<PreferenceCategory
+			android:title="Data harvesting settings">
+		<net.svamp.wifitracker.SeekBarPreference
+				android:key="minAccuracy"
+				android:title="Minimum GPS accuracy"
+				android:summary="Accuracy required to accept position"
+				android:defaultValue="10"
+				android:max="20"
+				baardsgaard:min="0"
+				baardsgaard:unitsLeft=""
+				baardsgaard:unitsRight="m"/>
+
+			</PreferenceCategory>
+</PreferenceScreen>
