@@ -15,6 +15,16 @@
 				baardsgaard:min="0"
 				baardsgaard:unitsLeft=""
 				baardsgaard:unitsRight="FPS"/>
+		<net.svamp.wifitracker.SeekBarPreference
+				android:key="compassRad"
+				android:title="Compass outer radius"
+				android:summary="Adjust scale of compass"
+				android:defaultValue="60"
+				android:max="150"
+				baardsgaard:interval="10"
+				baardsgaard:min="30"
+				baardsgaard:unitsLeft=""
+				baardsgaard:unitsRight="m"/>
 	</PreferenceCategory>
 
 	<PreferenceCategory

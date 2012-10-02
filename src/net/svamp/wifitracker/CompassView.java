@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -17,6 +18,10 @@ import java.util.ArrayList;
 
 public class CompassView extends View{
     private int smallestRad =0;
+
+    private int compassRad;
+    private int fpsSetting;
+
     private Point3D center;
     private double angle;
 
@@ -24,22 +29,57 @@ public class CompassView extends View{
     private final ArrayList<String> pointNames = new ArrayList<String>();
     public CompassView(Context context) {
         super( context);
+        init();
     }
 
     public CompassView(Context context, AttributeSet attrs) {
-
         super( context, attrs );
+        init();
     }
 
     public CompassView(Context context, AttributeSet attrs, int defStyle) {
-
         super( context, attrs, defStyle );
+        init();
     }
 
+    private void init () {
+        //Set scale of compass
+        compassRad = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassRad",60);
+        //Fetch FPS preference.
+        fpsSetting = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassFPS",5);
+        /*
+         * Initializes screen (sets center) and registers a handler for listening for new data points.
+         */
+        center=new Point3D(getLeft()+getWidth()/2,
+                getTop()+getHeight()/2);
+        smallestRad = Math.min(getWidth()/2-10, getHeight()/2-10);
+
+        Handler cvHandle = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                /* get values from message. */
+
+                //New Data about an AP's position!
+                if(msg.getData().get("newAPPointData")!=null) {
+                    String apName = msg.getData().getString("apName");
+                    double apDist = msg.getData().getDouble("apDistance");
+                    double apBearing = msg.getData().getDouble("apBearing");
+                    //We have this AP on map already. Delete and re-add.
+                    if(pointNames.contains(apName)) {
+                        int i = pointNames.indexOf(apName);
+                        pointNames.remove(i);
+                        points.remove(i);
+                    }
+                    addPoint(apName,apDist,apBearing);
+                }
+            }
+        };
+        CardListener.getInstance().addHandler(cvHandle);
+    }
 
     public void addPoint(String name,double dist, double bearing) {
-        //Let's calculate distance in pixels: smallestRad is 60m.
-        int r = (int)(dist*smallestRad/60);
+        //Let's calculate distance from center in pixels.
+        int r = (int)(dist*smallestRad/compassRad);
         Point3D p = Point3D.getCylindrical(r, bearing, 0);
         p.x+=center.x;
         p.y+=center.y;
@@ -50,50 +90,13 @@ public class CompassView extends View{
 
     @Override
     protected void onDraw(Canvas canvas){
-        /*
-<<<<<<< HEAD
-           * The following is run only one time. At view startScan
-=======
-           * The following is run only one time. At view start
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
-           */
-        if(center==null) {
-            center=new Point3D(getLeft()+getWidth()/2,
-                    getTop()+getHeight()/2);
-            smallestRad = Math.min(getWidth()/2-10, getHeight()/2-10);
-
-            Handler cvHandle = new Handler(){
-                @Override
-                public void handleMessage(Message msg) {
-                    /* get values from message. */
-
-                    //New Data about an AP's position!
-                    if(msg.getData().get("newAPPointData")!=null) {
-                        String apName = msg.getData().getString("apName");
-                        double apDist = msg.getData().getDouble("apDistance");
-                        double apBearing = msg.getData().getDouble("apBearing");
-                        //We have this AP on map already. Delete and re-add.
-                        if(pointNames.contains(apName)) {
-                            int i = pointNames.indexOf(apName);
-                            pointNames.remove(i);
-                            points.remove(i);
-                        }
-                        addPoint(apName,apDist,apBearing);
-                    }
-                }
-            };
-            CardListener.getInstance().addHandler(cvHandle);
-        }
-
         try {
-            //Fetch FPS preference.
-            int fpsSetting = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassFPS",5);
+            //Sleep to synch FPS.
             Thread.sleep(1000/fpsSetting);
             if(CardListener.getInstance()!=null)
                 angle=CardListener.getInstance().getCompassOrientation();
 
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+        } catch (InterruptedException e) { //Should never happen.
             e.printStackTrace();
         }
         Paint myPaint = new Paint();
@@ -102,6 +105,9 @@ public class CompassView extends View{
         myPaint.setStyle(Style.STROKE);
         myPaint.setColor(Color.GREEN);
         myPaint.setTextAlign(Align.CENTER);
+        myPaint.setTypeface(Typeface.MONOSPACE);
+        myPaint.setTextSize(16);
+
         canvas.drawCircle((int)center.x, (int)center.y, smallestRad, myPaint);
         canvas.drawCircle((int)center.x, (int)center.y, smallestRad*2/3, myPaint);
         canvas.drawCircle((int)center.x, (int)center.y, smallestRad/3, myPaint);
@@ -115,19 +121,19 @@ public class CompassView extends View{
                 translateX(center.x,center.y+smallestRad,angle),
                 translateY(center.x,center.y+smallestRad,angle),
                 myPaint);
-        canvas.drawText("20m",
+        canvas.drawText((compassRad/3)+"m",
                 translateX(center.x-smallestRad/3, center.y,angle),
                 translateY(center.x-smallestRad/3, center.y,angle),
                 myPaint);
-        canvas.drawText("20m",
+        canvas.drawText((compassRad/3)+"m",
                 translateX(center.x+smallestRad/3, center.y,angle),
                 translateY(center.x+smallestRad/3, center.y,angle),
                 myPaint);
-        canvas.drawText("40m",
+        canvas.drawText((2*compassRad/3)+"m",
                 translateX(center.x-2*smallestRad/3, center.y,angle),
                 translateY(center.x-2*smallestRad/3, center.y,angle),
                 myPaint);
-        canvas.drawText("40m",
+        canvas.drawText((2*compassRad/3)+"m",
                 translateX(center.x+2*smallestRad/3, center.y,angle),
                 translateY(center.x+2*smallestRad/3, center.y,angle),
                 myPaint);
@@ -160,7 +166,7 @@ public class CompassView extends View{
 
 
     /*
-      * @return translated coordinates for a rotated cartesian system.
+      * @return translated coordinates for a rotated cartesian system. Origin in center.
       */
     private int translateX(double x,double y, double angle) {
         return (int)((x-center.x)*Math.cos(angle)-(y-center.y)*Math.sin(angle)+center.x);
