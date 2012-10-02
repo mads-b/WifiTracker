@@ -32,8 +32,11 @@ public class CardListener {
     //This is a singleton.
     private static CardListener sInstance;
 
+<<<<<<< HEAD
     private boolean running = false;
 
+=======
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
     public CardListener(Activity ac) {
         //Let's get some surveillance going!
         wifiProcessor = new WifiProcessor(ac,this);
@@ -143,18 +146,30 @@ public class CardListener {
     /*
       * Self explanatory methods. Starts and stops sniffing of data.
       */
+<<<<<<< HEAD
     public void startScan () {
+=======
+    public void start() {
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
         wifiProcessor.startScan();
         locationProcessor.startProvider();
         compassProcessor.registerListeners();
     }
+<<<<<<< HEAD
     public void stopScan() {
+=======
+    public void stop() {
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
         wifiProcessor.stopScan();
         locationProcessor.stopProvider();
         compassProcessor.unregisterListeners();
     }
     public void onDestroy() {
+<<<<<<< HEAD
         stopScan();
+=======
+        stop();
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
     }
     public void onSatNumChanged(int num) {
         Bundle b=new Bundle();
@@ -201,5 +216,9 @@ public class CardListener {
         for(APDataStore store : apDataStores.values()) {
             store.computeApPosition();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
     }
 }

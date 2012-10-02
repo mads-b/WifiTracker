@@ -1,5 +1,8 @@
 package net.svamp.wifitracker;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;

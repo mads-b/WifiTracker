@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
 		xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
 		xmlns:baardsgaard="http://baardsgaard.com"
+=======
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 	<PreferenceCategory
 			android:title="Compass settings">
+<<<<<<< HEAD
 		<net.svamp.wifitracker.SeekBarPreference
 				android:key="compassFPS"
 				android:title="Render refresh speed"
@@ -30,4 +34,16 @@
 				baardsgaard:unitsRight="m"/>
 
 			</PreferenceCategory>
+=======
+		<SeekBarPreference
+				android:key="fps"
+				android:title="Refresh rate"
+				android:summary="The refresh rate of the compass animation."
+				android:dialogMessage="Frames per second"
+				android:defaultValue="5"
+				android:text=" FPS"
+				android:max="30"
+				/>
+	</PreferenceCategory>
+>>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
 </PreferenceScreen>
