@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.preference.PreferenceManager;
-=======
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,12 +22,10 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
+
         //Set Default preferences.
         PreferenceManager.setDefaultValues(this, R.layout.settings_screen, false);
 
-=======
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
         // Inflate our UI from its XML layout description.
         setContentView(R.layout.main_activity);
 

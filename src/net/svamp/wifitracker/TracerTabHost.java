@@ -16,11 +16,7 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         //Start Cardlistener!
         cardListener = new CardListener(this);
-<<<<<<< HEAD
         cardListener.startScan();
-=======
-        cardListener.start();
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
         setContentView(R.layout.tracer_tabs);
 
         Resources res = getResources(); // Resource object to get Drawables
@@ -50,27 +46,19 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
     }
     protected void onPause() {
         super.onPause();
-<<<<<<< HEAD
         cardListener.stopScan();
     }
+
+    @Override
     protected void onStop() {
         super.onStop();
         cardListener.stopScan();
     }
+
+    @Override
     protected void onResume() {
         super.onResume();
         cardListener.startScan();
-=======
-        cardListener.stop();
-    }
-    protected void onStop() {
-        super.onStop();
-        cardListener.stop();
-    }
-    protected void onResume() {
-        super.onResume();
-        cardListener.start();
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
     }
 
     @Override

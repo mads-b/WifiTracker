@@ -8,10 +8,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
-<<<<<<< HEAD
 import android.preference.PreferenceManager;
-=======
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
 import android.util.AttributeSet;
 import android.view.View;
 import net.svamp.wifitracker.core.Point3D;
@@ -89,13 +86,9 @@ public class CompassView extends View{
         }
 
         try {
-<<<<<<< HEAD
             //Fetch FPS preference.
             int fpsSetting = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassFPS",5);
             Thread.sleep(1000/fpsSetting);
-=======
-            Thread.sleep(50);
->>>>>>> 4edb34c973022b37201fe4a8aa6147846d86e34c
             if(CardListener.getInstance()!=null)
                 angle=CardListener.getInstance().getCompassOrientation();
 
