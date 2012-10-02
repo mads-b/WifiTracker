@@ -13,9 +13,14 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.View;
 import net.svamp.wifitracker.CardListener;
+import net.svamp.wifitracker.core.LatLon;
 import net.svamp.wifitracker.core.Point3D;
+import net.svamp.wifitracker.core.WifiItem;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CompassView extends View{
     private int smallestRad =0;
@@ -25,9 +30,13 @@ public class CompassView extends View{
 
     private Point3D center;
     private double angle;
+    private LatLon lastLocation = new LatLon(0,0);
 
-    private final ArrayList<Point3D> points = new ArrayList<Point3D>();
-    private final ArrayList<String> pointNames = new ArrayList<String>();
+    //True position of the wiFi APs found.
+    private final Map<String,WifiItem> points = new HashMap<String, WifiItem>();
+    //Points generated when calling recalculateRelativeApPositions().
+    private final Map<String,Point3D> compassPoints = new HashMap<String, Point3D>();
+
     public CompassView(Context context) {
         super( context);
         init();
@@ -55,34 +64,44 @@ public class CompassView extends View{
         Handler cvHandle = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                /* get values from message. */
-                //TODO: Adding points here based on relative position breaks when the user moves!
-                //New Data about an AP's position!
-                if(msg.getData().get("newAPPointData")!=null) {
-                    String apName = msg.getData().getString("apName");
-                    double apDist = msg.getData().getDouble("apDistance");
-                    double apBearing = msg.getData().getDouble("apBearing");
-                    //We have this AP on map already. Delete and re-add.
-                    if(pointNames.contains(apName)) {
-                        int i = pointNames.indexOf(apName);
-                        pointNames.remove(i);
-                        points.remove(i);
+                try {
+                    /* get values from message. */
+                    //New Data about an AP's position!
+                    if(msg.getData().getBoolean("newAPPointData")) {
+                        //Fetch and deserialize json.
+                        WifiItem ap = new WifiItem(new JSONObject(msg.getData().getString("wifiItemJson")));
+                        //We have this AP on map already. Delete and re-add.
+                        if(points.containsKey(ap.bssid)) {
+                            points.remove(ap.bssid);
+                        }
+                        points.put(ap.bssid,ap);
                     }
-                    addPoint(apName,apDist,apBearing);
-                }
+                    else if(msg.getData().getBoolean("gps_accurate")) {
+                        lastLocation = new LatLon(
+                                msg.getData().getDouble("curLatitude"),
+                                msg.getData().getDouble("curLongitude"));
+                        recalculateRelativeApPositions();
+                    }
+                } catch(JSONException e) { e.printStackTrace(); }
             }
         };
         CardListener.getInstance().addHandler(cvHandle);
     }
 
-    public void addPoint(String name,double dist, double bearing) {
-        //Let's calculate distance from center in pixels.
-        int r = (int)(dist*smallestRad/compassRad);
-        Point3D p = Point3D.getCylindrical(r, bearing, 0);
-        p.x+=center.x;
-        p.y+=center.y;
-        points.add(p);
-        pointNames.add(name);
+    /**
+     * Uses the "points" field and the lastLocation field to calculate the relative locations of the
+     * WiFi AP's in the vicinity.
+     */
+    private void recalculateRelativeApPositions() {
+        for(WifiItem ap : points.values()) {
+            LatLon apPos = ap.location;
+            double distanceTo = LatLon.distanceBetween(lastLocation,apPos);
+            //Subtract 90*, as the bearing is due north, and we need a due east one to translate to
+            double bearingTo = Math.PI/2-LatLon.bearingBetween(lastLocation,apPos);
+            //We in
+            Point3D apPoint = Point3D.getCylindrical(distanceTo,bearingTo,0);
+            compassPoints.put(ap.ssid,apPoint);
+        }
     }
 
 
@@ -156,10 +175,12 @@ public class CompassView extends View{
         myPaint.setColor(Color.RED);
         myPaint.setTextAlign(Align.LEFT);
         int i=0;
-        for(Point3D p : points) {
+        for(Map.Entry<String,Point3D> ap : compassPoints.entrySet()) {
+            Point3D p = ap.getValue();
+            String name = ap.getKey();
             canvas.drawCircle(translateX((int)p.x,(int)p.y,angle),
                     translateY((int)p.x,(int)p.y,angle),5,myPaint);
-            canvas.drawText(pointNames.get(i),
+            canvas.drawText(name,
                     translateX((int)p.x,(int)p.y,angle)+6,
                     translateY((int)p.x,(int)p.y,angle),
                     myPaint);

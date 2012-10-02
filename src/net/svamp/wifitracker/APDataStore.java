@@ -55,7 +55,7 @@ public class APDataStore extends Thread {
         boolean spotExists=false;
         for(int i=0;i<coords.size();i++) {
             //If distance is less than the accuracy, it is assumed to be the same spot
-            if(distanceBetween(coords.get(i).getCoords(),newP.getCoords())<LocationProcessor.minAccuracy && !spotExists) {
+            if(LatLon.distanceBetween(coords.get(i).getCoords(), newP.getCoords())<LocationProcessor.minAccuracy && !spotExists) {
                 //Compute average of the signal strengths in this spot
                 //Now one more datapoint in this area
                 points.set(i,points.get(i)+1);
@@ -105,26 +105,6 @@ public class APDataStore extends Thread {
         return wifiItem;
     }
 
-
-    /**
-     * Computes the distance between two GPS coordinates. Uses the Haversine formula
-     * @param p1 Distance from this point
-     * @param p2 To this one
-     * @return Distance in meters.
-     */
-    private static double distanceBetween(LatLon p1, LatLon p2) {
-        double R = 6371000; // m
-        double dLat = (p2.getLat()-p1.getLat());
-        double dLon = (p2.getLon()-p1.getLon());
-        double lat1 = p1.getLat();
-        double lat2 = p2.getLat();
-
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        return R * c;
-    }
-
     @Override
     public void run() {
         //Vector on the format {x0,y0,n0};
@@ -152,7 +132,11 @@ public class APDataStore extends Thread {
         //Input solution into WifiItem
         wifiItem.location = new LatLon(solutionVector[1],solutionVector[0]);
 
-        apPositionListener.fireApPositionComputed(this);
+        try {
+            apPositionListener.fireApPositionComputed(this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public JSONArray toJson() throws JSONException {

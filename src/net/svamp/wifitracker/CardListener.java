@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.core.WifiNetworkList;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -180,17 +181,10 @@ public class CardListener {
      * This method takes this new data, bundles it, and sends it as an Android message
      * @param apStore The APDataStore
      */
-    public void fireApPositionComputed(APDataStore apStore) {
-        Location loc = new Location("pp");
-        loc.setLongitude(apStore.getWifiItem().location.getLon());
-        loc.setLatitude(apStore.getWifiItem().location.getLat());
+    public void fireApPositionComputed(APDataStore apStore) throws JSONException {
         Bundle b=new Bundle();
         b.putBoolean("newAPPointData", true);
-        b.putString("apName", apStore.getWifiItem().ssid);
-        b.putDouble("apDistance", lastLocation.distanceTo(loc));
-        b.putDouble("apBearing", lastLocation.bearingTo(loc));
-        b.putDouble("apLatitude", loc.getLatitude());
-        b.putDouble("apLongitude", loc.getLongitude());
+        b.putString("wifiItemJson",apStore.getWifiItem().toJson().toString());
         Message m=new Message();
         m.setData(b);
         sendMessage(m);

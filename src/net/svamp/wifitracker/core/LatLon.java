@@ -41,4 +41,33 @@ public class LatLon {
         json.put("lon",lon);
         return json;
     }
+
+    /**
+     * Computes the distance between two LatLon objects coordinates. Uses the Haversine formula
+     * @param p1 Distance from this point
+     * @param p2 To this one
+     * @return Distance in meters.
+     */
+    public static double distanceBetween(LatLon p1, LatLon p2) {
+        double R = 6371000; // m
+        double dLat = (p2.lat-p1.lat);
+        double dLon = (p2.lon-p1.lon);
+        double lat1 = p1.lat;
+        double lat2 = p2.lat;
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+
+    /**
+     * Calculates the bearing between two points if one would travel from p1 to p2.
+     * Is greatly simplified to two dimensions.
+     * @param p1 Point to calculate bearing from
+     * @param p2 Point to salculate bearing to
+     * @return Bearing (angle between the line straight north, and the line between p1 and p2)..
+     */
+    public static double bearingBetween(LatLon p1, LatLon p2) {
+        return Math.atan2(p2.lon-p1.lon,p2.lat-p1.lat);
+    }
 }
