@@ -6,7 +6,7 @@
 		android:layout_height="fill_parent">
 	<PreferenceCategory
 			android:title="Compass settings">
-		<net.svamp.wifitracker.SeekBarPreference
+		<net.svamp.wifitracker.gui.SeekBarPreference
 				android:key="compassFPS"
 				android:title="Render refresh speed"
 				android:summary="Adjust compass visual FPS"
@@ -15,7 +15,7 @@
 				baardsgaard:min="0"
 				baardsgaard:unitsLeft=""
 				baardsgaard:unitsRight="FPS"/>
-		<net.svamp.wifitracker.SeekBarPreference
+		<net.svamp.wifitracker.gui.SeekBarPreference
 				android:key="compassRad"
 				android:title="Compass outer radius"
 				android:summary="Adjust scale of compass"
@@ -29,7 +29,7 @@
 
 	<PreferenceCategory
 			android:title="Data harvesting settings">
-		<net.svamp.wifitracker.SeekBarPreference
+		<net.svamp.wifitracker.gui.SeekBarPreference
 				android:key="minAccuracy"
 				android:title="Minimum GPS accuracy"
 				android:summary="Accuracy required to accept position"

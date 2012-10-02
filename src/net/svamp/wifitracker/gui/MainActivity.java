@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;

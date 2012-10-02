@@ -56,7 +56,7 @@ public class CompassView extends View{
             @Override
             public void handleMessage(Message msg) {
                 /* get values from message. */
-
+                //TODO: Adding points here based on relative position breaks when the user moves!
                 //New Data about an AP's position!
                 if(msg.getData().get("newAPPointData")!=null) {
                     String apName = msg.getData().getString("apName");
