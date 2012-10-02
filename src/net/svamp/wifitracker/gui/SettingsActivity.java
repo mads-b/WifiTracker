@@ -1,7 +1,8 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import net.svamp.wifitracker.R;
 
 /**
  */

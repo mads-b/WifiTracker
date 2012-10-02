@@ -1,4 +1,4 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

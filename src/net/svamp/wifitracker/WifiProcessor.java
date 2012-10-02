@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
 import net.svamp.wifitracker.core.WifiNetworkList;
+import net.svamp.wifitracker.gui.MainActivity;
 
 public class WifiProcessor extends BroadcastReceiver {
     private final Activity activity;

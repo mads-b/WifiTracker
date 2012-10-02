@@ -1,11 +1,13 @@
 
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
+import net.svamp.wifitracker.CardListener;
+import net.svamp.wifitracker.R;
 
 public class CompassActivity extends Activity {
     private TextView satsNumField;

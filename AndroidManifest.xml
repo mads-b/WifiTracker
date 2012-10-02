@@ -14,16 +14,16 @@
 		<uses-library android:name="com.google.android.maps" />
 
 
-		<activity android:name="MainActivity">
+		<activity android:name=".gui.MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name="CompassActivity"></activity>
-		<activity android:name="SettingsActivity"></activity>
-		<activity android:name="TrackerMapActivity"></activity>
-		<activity android:name=".TracerTabHost" android:theme="@android:style/Theme.NoTitleBar"></activity>
+		<activity android:name=".gui.CompassActivity"></activity>
+		<activity android:name=".gui.SettingsActivity"></activity>
+		<activity android:name=".gui.TrackerMapActivity"></activity>
+		<activity android:name=".gui.TracerTabHost" android:theme="@android:style/Theme.NoTitleBar"></activity>
 	</application>
 </manifest>
  

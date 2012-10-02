@@ -1,4 +1,4 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import net.svamp.wifitracker.R;
 import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.core.WifiNetworkList;
 

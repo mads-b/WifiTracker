@@ -1,4 +1,4 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,6 +12,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.View;
+import net.svamp.wifitracker.CardListener;
 import net.svamp.wifitracker.core.Point3D;
 
 import java.util.ArrayList;

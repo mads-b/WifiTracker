@@ -1,4 +1,4 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import net.svamp.wifitracker.R;
 
 public class SeekBarPreference extends Preference implements OnSeekBarChangeListener {
 

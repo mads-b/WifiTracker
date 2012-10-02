@@ -1,10 +1,12 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.gui;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import com.google.android.maps.*;
+import net.svamp.wifitracker.CardListener;
+import net.svamp.wifitracker.R;
 
 import java.util.List;
 
