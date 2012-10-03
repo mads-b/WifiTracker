@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -50,24 +49,19 @@ public class InternalPersistence extends AbstractPersistence {
 
 
     @Override
-    public Collection<APDataStore> fetchApData () throws FileNotFoundException {
+    public Collection<APDataStore> fetchApData () {
         ArrayList<APDataStore> apData = new ArrayList<APDataStore>();
         try {
             //Iterate over private files.
             for(String file : context.fileList()) {
                 if(file.endsWith("ApInfo.dat")) {
-                    String bss = file.split("-")[0];
-                    String jsonApDataPoints = streamToString(context.openFileInput(bss+"-ApDataPoints.dat"));
-                    String jsonApInfo       = streamToString(context.openFileInput(file));
-                    apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+                    String bss = file.split("-")[0]; //Since filename is bs:si:db:ss:id-ApInfo.dat
+                    apData.add(fetchApData(bss));
                 }
             }
-        } catch (JSONException e) {
-            Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
         } catch (IOException e) {
             Log.e("IOException","File could not be read. "+e.getLocalizedMessage());
         }
-
         return apData;
     }
 

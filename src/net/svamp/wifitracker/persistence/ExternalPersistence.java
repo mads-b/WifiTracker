@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -49,18 +48,13 @@ public class ExternalPersistence extends AbstractPersistence {
 
 
     @Override
-    public Collection<APDataStore> fetchApData () throws FileNotFoundException {
+    public Collection<APDataStore> fetchApData () {
         ArrayList<APDataStore> apData = new ArrayList<APDataStore>();
         try {
             //Iterate over all data files on sd card
             for(String bss : new File(dataFolderName).list()) {
-                String jsonApDataPoints = streamToString(getInputStream(dataFolderName + bss,"ApDataPoints.dat"));
-                String jsonApInfo       = streamToString(getInputStream(dataFolderName + bss,"ApInfo.dat"));
-                apData.add(new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints)));
+                apData.add(fetchApData(bss));
             }
-
-        } catch (JSONException e) {
-            Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
         } catch (IOException e) {
             Log.e("IOException","File could not be read. "+e.getLocalizedMessage());
         }
