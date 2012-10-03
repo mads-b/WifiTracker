@@ -8,8 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,28 +23,16 @@ public class InternalPersistence extends AbstractPersistence {
     @Override
     public void storeApData (Collection<APDataStore> apData) throws IOException {
         for(APDataStore dataStore : apData) {
-            Writer wifiItemWriter,apDataPointsWriter;
-
-            wifiItemWriter = new OutputStreamWriter(
-                    context.openFileOutput(dataStore.getWifiItem().bssid+"-ApInfo.dat",Context.MODE_PRIVATE));
-            apDataPointsWriter = new OutputStreamWriter(
-                    context.openFileOutput(dataStore.getWifiItem().bssid+"-ApDataPoints.dat",Context.MODE_PRIVATE));
-
             try {
-                wifiItemWriter.write(dataStore.getWifiItem().toJson().toString());
-                apDataPointsWriter.write(dataStore.toJson().toString());
+                this.writeStringToFile(context.openFileOutput(dataStore.getWifiItem().bssid+"-ApInfo.dat",Context.MODE_PRIVATE),
+                        dataStore.getWifiItem().toJson().toString());
+                this.writeStringToFile(context.openFileOutput(dataStore.getWifiItem().bssid+"-ApDataPoints.dat",Context.MODE_PRIVATE),
+                        dataStore.toJson().toString());
             } catch (JSONException e) {
                 Log.e("CORRUPT DATA","Failed to JSONify APData. "+e.getLocalizedMessage());
             }
-            finally {
-                wifiItemWriter.close();
-                apDataPointsWriter.close();
-            }
         }
     }
-
-
-
 
     @Override
     public Collection<APDataStore> fetchApData () {

@@ -48,5 +48,17 @@ public abstract class AbstractPersistence implements Persistence {
         stream.close();
         return s;
     }
+
+    protected void writeStringToFile(String path,String data) throws IOException {
+        File f = new File(path);
+        f.mkdirs();
+        writeStringToFile(new FileOutputStream(f),data);
+    }
+
+    protected void writeStringToFile(OutputStream stream,String data) throws IOException {
+        Writer writer = new OutputStreamWriter(new BufferedOutputStream(stream));
+        writer.write(data);
+        writer.close();
+    }
 }
 

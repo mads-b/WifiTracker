@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,20 +27,13 @@ public class ExternalPersistence extends AbstractPersistence {
     @Override
     public void storeApData (Collection<APDataStore> apData) throws IOException {
         for(APDataStore dataStore : apData) {
-            Writer wifiItemWriter,apDataPointsWriter;
-
             String dst = dataFolderName + dataStore.getWifiItem().bssid +"/";
-            wifiItemWriter = getWriter(dst,"ApInfo.dat");
-            apDataPointsWriter = getWriter(dst,"ApDataPoints.dat");
+
             try {
-                wifiItemWriter.write(dataStore.getWifiItem().toJson().toString());
-                apDataPointsWriter.write(dataStore.toJson().toString());
+                this.writeStringToFile(dst+"ApInfo.dat",dataStore.getWifiItem().toJson().toString());
+                this.writeStringToFile(dst+"ApDataPoints.dat",dataStore.toJson().toString());
             } catch (JSONException e) {
                 Log.e("CORRUPT DATA","Failed to JSONify APData. "+e.getLocalizedMessage());
-            }
-            finally {
-                wifiItemWriter.close();
-                apDataPointsWriter.close();
             }
         }
     }
