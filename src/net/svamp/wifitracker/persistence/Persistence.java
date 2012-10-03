@@ -1,5 +1,6 @@
-package net.svamp.wifitracker;
+package net.svamp.wifitracker.persistence;
 
+import net.svamp.wifitracker.APDataStore;
 import org.json.JSONException;
 
 import java.io.FileNotFoundException;

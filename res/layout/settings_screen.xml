@@ -29,6 +29,10 @@
 
 	<PreferenceCategory
 			android:title="Data harvesting settings">
+    <ListPreference
+        android:title="Data point storage"
+        android:summary="Choose where to store data points"
+        android:key="dataPointStorageOption" />
 		<net.svamp.wifitracker.gui.SeekBarPreference
 				android:key="minAccuracy"
 				android:title="Minimum GPS accuracy"
@@ -38,6 +42,7 @@
 				baardsgaard:min="0"
 				baardsgaard:unitsLeft=""
 				baardsgaard:unitsRight="m"/>
+
 
 	</PreferenceCategory>
 </PreferenceScreen>

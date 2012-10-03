@@ -59,21 +59,26 @@ public final class R {
     }
     public static final class string {
         public static final int button_help=0x7f040004;
-        public static final int button_help_close=0x7f040007;
+        public static final int button_help_close=0x7f04000a;
         public static final int button_recompute=0x7f040005;
         public static final int button_record_all=0x7f040002;
+        /**  Button text 
+         */
         public static final int button_record_selected=0x7f040001;
         public static final int button_settings=0x7f040003;
-        public static final int data_point_num_field=0x7f04000c;
-        public static final int first_gps_fix=0x7f04000a;
-        public static final int gps_disabled=0x7f040009;
-        public static final int help_text=0x7f04000e;
-        public static final int help_title=0x7f04000d;
-        public static final int sats_num_field=0x7f04000b;
-        public static final int wifi_disabled=0x7f040008;
-        public static final int wifi_listen_selection=0x7f040006;
+        public static final int change_persistence_warning=0x7f040006;
+        public static final int data_point_num_field=0x7f04000f;
+        public static final int first_gps_fix=0x7f04000d;
+        public static final int gps_disabled=0x7f04000c;
+        public static final int help_text=0x7f040011;
+        public static final int help_title=0x7f040010;
+        public static final int no=0x7f040008;
+        public static final int sats_num_field=0x7f04000e;
+        public static final int wifi_disabled=0x7f04000b;
+        public static final int wifi_listen_selection=0x7f040009;
         /**  Simple strings. 
          */
         public static final int wifitracker_name=0x7f040000;
+        public static final int yes=0x7f040007;
     }
 }

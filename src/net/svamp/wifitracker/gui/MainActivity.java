@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 b.putBoolean("hasSelection", true);
                 b.putStringArrayList("bssids", adapter.getClicked());
 
-                intent = new Intent(MainActivity.this, CompassActivity.class);
+                intent = new Intent(MainActivity.this, TracerTabHost.class);
                 intent.putExtras(b);
                 startActivity(intent);
                 break;
