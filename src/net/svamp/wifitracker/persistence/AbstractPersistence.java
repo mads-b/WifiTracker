@@ -16,7 +16,7 @@ public abstract class AbstractPersistence implements Persistence {
      * Opens a writer to a file. Makes directories if the path does not exist.
      * @param path Path to file
      * @param file Filename
-     * @return
+     * @return An implementation of Writer.
      * @throws IOException
      */
     protected Writer getWriter(String path,String file) throws IOException {
@@ -32,7 +32,7 @@ public abstract class AbstractPersistence implements Persistence {
      * @return Inputstream reading from file
      * @throws FileNotFoundException
      */
-    protected InputStream getInputStream(String path, String file) throws FileNotFoundException {
+    InputStream getInputStream (String path, String file) throws FileNotFoundException {
         File f = new File(path,file);
         return new BufferedInputStream(new FileInputStream(f));
     }
@@ -43,7 +43,7 @@ public abstract class AbstractPersistence implements Persistence {
      * @return String containing the entire InputStream until EOF is reached
      * @throws IOException If something went horribly wrong
      */
-    protected String streamToString(InputStream stream) throws IOException {
+    String streamToString (InputStream stream) throws IOException {
         String s = new Scanner(stream).useDelimiter("\\A").next();
         stream.close();
         return s;
@@ -55,7 +55,7 @@ public abstract class AbstractPersistence implements Persistence {
      * @param data String to write to file
      * @throws IOException
      */
-    protected void writeStringToFile(String path,String data) throws IOException {
+    void writeStringToFile (String path, String data) throws IOException {
         File f = new File(path);
         f.mkdirs();
         writeStringToFile(new FileOutputStream(f),data);
@@ -67,7 +67,7 @@ public abstract class AbstractPersistence implements Persistence {
      * @param data String to write to file
      * @throws IOException
      */
-    protected void writeStringToFile(OutputStream stream,String data) throws IOException {
+    void writeStringToFile (OutputStream stream, String data) throws IOException {
         Writer writer = new OutputStreamWriter(new BufferedOutputStream(stream));
         writer.write(data);
         writer.close();

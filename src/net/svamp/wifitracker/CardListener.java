@@ -166,7 +166,7 @@ public class CardListener {
         return compassProcessor.getOrientation();
     }
 
-    public int getNumberOfDataPoints() {
+    int getNumberOfDataPoints () {
         int i=0;
         for(APDataStore a : apDataStores.values()) {
             i+=a.getDataSize();

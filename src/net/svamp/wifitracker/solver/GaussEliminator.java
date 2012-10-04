@@ -8,12 +8,12 @@ import java.util.Arrays;
  * NOTE2: The matrix provided as A MUST be quadratic (n equations, n unknowns)!
  * Anything else will throw an IllegalArgumentException. This exception will also be thrown if the matrix is singular.
  */
-public class GaussEliminator {
+class GaussEliminator {
     /**
      * Solves the given linear problem. A must be nonsingular and quadratic (nxn), and b must be of n length.
      * THe problem is defined as the problem Ax=b.
-     * @param A
-     * @param b
+     * @param A nxn Problem matrix
+     * @param b nx1 Column vector
      * @return Solution vector x
      * @throws IllegalArgumentException If matrix is singular, nonquadratic, or if b is not the correct size compared to argument A.
      */
@@ -31,8 +31,8 @@ public class GaussEliminator {
 
     /**
      * Takes an arbitrary quadratic matrix A, and a solution vector b, and in-place reduces A to row-echelon form.
-     * @param A
-     * @param b
+     * @param A nxn Problem matrix
+     * @param b nx1 Column vector
      * @throws IllegalArgumentException When matrix is singular.
      */
     private static void gaussElimination(double[][] A,double[] b) throws IllegalArgumentException {

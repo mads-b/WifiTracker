@@ -126,9 +126,9 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 
     /**
      * Update a SeekBarPreference view with our current state
-     * @param view
+     * @param view View to update
      */
-    protected void updateView(View view) {
+    void updateView (View view) {
 
         try {
             RelativeLayout layout = (RelativeLayout)view;
@@ -187,9 +187,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 
     @Override
     protected Object onGetDefaultValue(TypedArray ta, int index){
-
-        int defaultValue = ta.getInt(index, DEFAULT_VALUE);
-        return defaultValue;
+        return ta.getInt(index, DEFAULT_VALUE);
 
     }
 

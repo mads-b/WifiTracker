@@ -8,7 +8,7 @@ import android.location.LocationManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class GpsStatusListener implements GpsStatus.Listener{
+class GpsStatusListener implements GpsStatus.Listener{
 
     private final LocationManager locationManager;
     private GpsStatus gpsStatus;

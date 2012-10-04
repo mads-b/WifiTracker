@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +30,7 @@ public class CompassView extends View{
     private Point3D center;
     private double angle;
     private LatLon lastLocation = new LatLon(0,0);
+    private final Paint myPaint = new Paint();
 
     //True position of the wiFi APs found.
     private final Map<String,WifiItem> points = new HashMap<String, WifiItem>();
@@ -57,6 +57,14 @@ public class CompassView extends View{
         compassRad = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassRad",60);
         //Fetch FPS preference.
         fpsSetting = PreferenceManager.getDefaultSharedPreferences(this.getContext()).getInt("compassFPS",5);
+        //Set some paint settings
+        myPaint.setStrokeWidth(2);
+        myPaint.setAntiAlias(true);
+        myPaint.setStyle(Paint.Style.STROKE);
+        myPaint.setTypeface(Typeface.MONOSPACE);
+        myPaint.setTextSize(16);
+
+
         /*
          * Registers a handler for listening for new calculated AP positions.
          */
@@ -123,14 +131,9 @@ public class CompassView extends View{
         } catch (InterruptedException e) { //Should never happen.
             e.printStackTrace();
         }
-        Paint myPaint = new Paint();
-        myPaint.setStrokeWidth(2);
-        myPaint.setAntiAlias(true);
-        myPaint.setStyle(Style.STROKE);
+
         myPaint.setColor(Color.GREEN);
         myPaint.setTextAlign(Align.CENTER);
-        myPaint.setTypeface(Typeface.MONOSPACE);
-        myPaint.setTextSize(16);
 
         canvas.drawCircle((int)center.x, (int)center.y, smallestRad, myPaint);
         canvas.drawCircle((int)center.x, (int)center.y, smallestRad*2/3, myPaint);

@@ -59,7 +59,7 @@ public class TrackerMapActivity extends MapActivity {
         // TODO Auto-generated method stub
         return false;
     }
-    public void setGeoPoint(int latitude, int longitude) {
+    void setGeoPoint (int latitude, int longitude) {
 
         geoPoint=new GeoPoint(latitude,longitude);
         if(!centeredOnUser) {

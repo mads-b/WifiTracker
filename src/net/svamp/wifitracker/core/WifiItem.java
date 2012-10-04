@@ -6,8 +6,8 @@ import org.json.JSONObject;
 
 public class WifiItem {
     //Constants for determining what icon this item should have.
-    static final String[] SECURITY_MODES = { "WEP", "WPA", "WPA2", "WPA_EAP", "IEEE8021X" };
-    static final Integer[] DRAWABLE_ID = { R.drawable.wep, R.drawable.wpa, R.drawable.wpa2,R.drawable.wpa_eap, R.drawable.ieee8021x,R.drawable.none};
+    private static final String[] SECURITY_MODES = { "WEP", "WPA", "WPA2", "WPA_EAP", "IEEE8021X" };
+    private static final Integer[] DRAWABLE_ID = { R.drawable.wep, R.drawable.wpa, R.drawable.wpa2,R.drawable.wpa_eap, R.drawable.ieee8021x,R.drawable.none};
 
     public String ssid;
     public String features;

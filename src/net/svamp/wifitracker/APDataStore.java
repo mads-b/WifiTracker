@@ -82,7 +82,6 @@ public class APDataStore extends Thread {
      * calculates the AP position by inputting the datapoints into the GaussNewtonSolver. For more iteration details,
      * @see GaussNewtonSolver
      * @see net.svamp.wifitracker.solver.ThompsonJacobian
-     * @return A point in space where the AP described by this object i estimated to be.
      */
     public void computeApPosition () {
         if(coords.size()>=4)

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import net.svamp.wifitracker.R;
 import net.svamp.wifitracker.core.WifiItem;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
+class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
     private WifiNetworkList results = new WifiNetworkList();
     private final List<View> listItems = new ArrayList<View>();
     private final List<Boolean> clicked = new ArrayList<Boolean>();
@@ -30,9 +29,9 @@ public class WifiAdapter extends BaseAdapter  implements OnItemClickListener {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.wifi_list_item, null);
-            ImageView wifiLogo = (ImageView) convertView.findViewById(R.id.encryption_logo);
-            wifiLogo.setImageResource(result.getDrawableId());
             TextView wifiName = (TextView) convertView.findViewById(R.id.wifi_name);
+            //Set wifi icon.
+            wifiName.setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(result.getDrawableId()), null, null, null);
             wifiName.setText(result.ssid);
             clicked.add(false);
             listItems.add(convertView);

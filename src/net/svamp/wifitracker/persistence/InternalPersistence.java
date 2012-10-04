@@ -16,7 +16,7 @@ import java.util.Collection;
  */
 public class InternalPersistence extends AbstractPersistence {
 
-    private Context context;
+    private final Context context;
     public InternalPersistence (Context context) {
         this.context=context;
     }
@@ -59,15 +59,12 @@ public class InternalPersistence extends AbstractPersistence {
         try {
             jsonApDataPoints = streamToString(context.openFileInput(bss+"-ApDataPoints.dat"));
             jsonApInfo       = streamToString(context.openFileInput(bss+"-ApInfo.dat"));
+            if(jsonApDataPoints.length()!=0) {
+                return new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints));
+            }
+        } catch (JSONException e) {
+            Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
         }
-        finally {
-            try {
-                if(jsonApDataPoints.length()!=0)
-                    return new APDataStore(new JSONObject(jsonApInfo),new JSONArray(jsonApDataPoints));
-                else return null;
-            } catch (JSONException e) {
-                Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
-            } finally { return null; }
-        }
+        return null;
     }
 }

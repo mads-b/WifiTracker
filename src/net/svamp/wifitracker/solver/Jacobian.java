@@ -11,8 +11,8 @@ public interface Jacobian {
 
     /**
      * Fetch an element in the jacobian matrix. Bounds checking is up to the implementer.
-     * @param row
-     * @param col
+     * @param row Row id in matrix. Number from 0 to getRowSize()-1
+     * @param col Column id in matrix. Number from 0 to getColumnSize()-1
      */
     double get(int row,int col);
 

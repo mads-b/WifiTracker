@@ -15,16 +15,10 @@
   <string name="loadingDataPointsFromPersistence">Loading data points from storage.. If you press back, you will not get to use the data points in computations!</string>
   <string name="savingDataPointsToPersistence">Saving data points in memory to storage..</string>
 
-  <string name="yes">Yes</string>
-  <string name="no">No</string>
-
-  <string name="wifi_listen_selection"></string>
   <string name="button_help_close">Close Help</string>
   <string name="wifi_disabled">WiFi is disabled. Please enable it in settings.</string>
   <string name="gps_disabled">GPS is disabled. Please enable it in settings.</string>
   <string name="first_gps_fix">GPS fix attained. Waiting for target accuracy..</string>
-  <string name="sats_num_field">Number of Sats found:</string>
-  <string name="data_point_num_field">Number of datapoints:</string>
 
 
 

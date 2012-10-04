@@ -16,7 +16,7 @@ public class LocationProcessor implements LocationListener {
     public static int minAccuracy;
     private boolean displayedLocationProviderSelectionScreen = false;
     final GpsStatus status = null;
-    private LocationManager locationManager;
+    private final LocationManager locationManager;
     private String provider;
     private final GpsStatusListener gpsStatusListener;
     private final CardListener listener;

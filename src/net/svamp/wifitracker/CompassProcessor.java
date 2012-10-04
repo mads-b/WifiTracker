@@ -9,15 +9,15 @@ import android.hardware.SensorManager;
 
 import java.util.Arrays;
 
-public class CompassProcessor implements SensorEventListener {
+class CompassProcessor implements SensorEventListener {
     /* sensor data */
-    final SensorManager m_sensorManager;
-    final float []m_lastMagFields = new float[3];
-    final float []m_lastAccels = new float[3];
+    private final SensorManager m_sensorManager;
+    private final float []m_lastMagFields = new float[3];
+    private final float []m_lastAccels = new float[3];
     private final float[] m_rotationMatrix = new float[16];
     private final float[] m_orientation = new float[4];
 
-    final DecayingAverageFilter m_filter = new DecayingAverageFilter();
+    private final DecayingAverageFilter m_filter = new DecayingAverageFilter();
 
 
 
@@ -101,7 +101,7 @@ public class CompassProcessor implements SensorEventListener {
         }
     }
 
-    public void computeOrientation() {
+    void computeOrientation () {
         if (SensorManager.getRotationMatrix(m_rotationMatrix, null, m_lastMagFields, m_lastAccels)) {
             SensorManager.getOrientation(m_rotationMatrix, m_orientation);
             /* yaw, rotation around z axis */

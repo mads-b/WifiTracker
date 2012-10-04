@@ -3,7 +3,6 @@ package net.svamp.wifitracker.persistence;
 import net.svamp.wifitracker.APDataStore;
 import org.json.JSONException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -13,11 +12,11 @@ public interface Persistence {
 
     /**
      * Store a quantity of AP dataPoints on memory. All previous data on the same APs are overwritten.
-     * @param apData
+     * @param apData A collection of APDataStore objects to store persistently.
      * @throws IOException
      * @throws JSONException
      */
-    void storeApData(Collection<APDataStore> apData) throws IOException, JSONException;
+    void storeApData(Collection<APDataStore> apData) throws IOException;
 
 
     /**
@@ -25,7 +24,7 @@ public interface Persistence {
      * This method calls fetchApData(String bss) for every dataPoint.
      * @return Collection of APDataStores containing all the data on all the APs registered
      */
-    Collection<APDataStore> fetchApData() throws FileNotFoundException;
+    Collection<APDataStore> fetchApData();
 
     /**
      * Fetches the dataset stored on this specific access point

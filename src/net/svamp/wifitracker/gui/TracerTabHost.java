@@ -15,9 +15,7 @@ import net.svamp.wifitracker.CardListener;
 import net.svamp.wifitracker.R;
 import net.svamp.wifitracker.persistence.AbstractPersistence;
 import net.svamp.wifitracker.persistence.Persistence;
-import org.json.JSONException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -72,20 +70,18 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run () {
-                try {
-                    //Fetch and add persisted datapoints to data store.
-                    Collection<APDataStore> dataPoints = persistence.fetchApData();
-                    if(dataPoints.size()!=0) {
-                        //Show dialog..
-                        dialog.show();
-                        int increment = 100/dataPoints.size();
-                        for(APDataStore store : dataPoints) {
-                            cardListener.addDataPoints(store);
-                            dialog.incrementProgressBy(increment);
-                        }
-                        dialog.dismiss();
+                //Fetch and add persisted datapoints to data store.
+                Collection<APDataStore> dataPoints = persistence.fetchApData();
+                if(dataPoints.size()!=0) {
+                    //Show dialog..
+                    dialog.show();
+                    int increment = 100/dataPoints.size();
+                    for(APDataStore store : dataPoints) {
+                        cardListener.addDataPoints(store);
+                        dialog.incrementProgressBy(increment);
                     }
-                } catch (FileNotFoundException e) {}
+                    dialog.dismiss();
+                }
             }
         }).start();
     }
@@ -97,8 +93,6 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
             persistence.storeApData(cardListener.getDataPoints());
         } catch (IOException e) {
             Log.e("IOException",e.getMessage());
-        } catch (JSONException e) {
-            Log.e("JSONException",e.getMessage());
         }
     }
 

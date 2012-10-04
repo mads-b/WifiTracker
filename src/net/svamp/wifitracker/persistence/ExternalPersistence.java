@@ -66,6 +66,7 @@ public class ExternalPersistence extends AbstractPersistence {
             else return null;
         } catch (JSONException e) {
             Log.e("JSONEXCEPTION","Failed to parse json. "+e.getLocalizedMessage());
-        } finally { return null; }
+        }
+        return null;
     }
 }

@@ -15,9 +15,9 @@ import net.svamp.wifitracker.WifiProcessor;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-    ListView wifiList;
-    WifiAdapter adapter;
-    WifiProcessor processor;
+    private ListView wifiList;
+    private WifiAdapter adapter;
+    private WifiProcessor processor;
 
     /** Called with the activity is first created. */
     @Override
