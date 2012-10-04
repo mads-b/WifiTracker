@@ -197,4 +197,12 @@ public class CardListener {
     public Collection<APDataStore> getDataPoints() {
         return apDataStores.values();
     }
+
+    /**
+     * Puts old data point data into the cardListener
+     * @param dataPoints Datapoints to add.
+     */
+    public void addDataPoints (APDataStore dataPoints) {
+            apDataStores.put(dataPoints.getWifiItem().bssid,dataPoints);
+    }
 }

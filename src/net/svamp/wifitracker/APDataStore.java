@@ -85,7 +85,7 @@ public class APDataStore extends Thread {
      * @return A point in space where the AP described by this object i estimated to be.
      */
     public void computeApPosition () {
-        if(coords.size()>=3)
+        if(coords.size()>=4)
             this.start();
     }
 

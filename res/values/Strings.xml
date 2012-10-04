@@ -12,6 +12,9 @@
   <string name="button_recompute">Recompute!</string>
 
   <string name="change_persistence_warning">Warning! Changing storage method will make all the data stored elsewhere unavailable!</string>
+  <string name="loadingDataPointsFromPersistence">Loading data points from storage.. If you press back, you will not get to use the data points in computations!</string>
+  <string name="savingDataPointsToPersistence">Saving data points in memory to storage..</string>
+
   <string name="yes">Yes</string>
   <string name="no">No</string>
 

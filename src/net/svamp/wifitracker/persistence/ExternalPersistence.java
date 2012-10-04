@@ -13,14 +13,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
+ * Persistence class for storing APDataStores to external(SD) memory
  */
 public class ExternalPersistence extends AbstractPersistence {
     private static String dataFolderName;
 
-    private Context context;
-
     public ExternalPersistence (Context context) {
-        this.context=context;
         dataFolderName = context.getExternalFilesDir(null).getAbsolutePath()+"/.WifiTrackerData/";
     }
 

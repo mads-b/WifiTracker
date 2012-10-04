@@ -1,5 +1,8 @@
 package net.svamp.wifitracker.persistence;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -68,6 +71,17 @@ public abstract class AbstractPersistence implements Persistence {
         Writer writer = new OutputStreamWriter(new BufferedOutputStream(stream));
         writer.write(data);
         writer.close();
+    }
+
+    public static Persistence getPersistence(Context context) {
+        String storageOption = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString("dataPointStorageOption", "external");
+        if(storageOption.equals("external")) {
+            return new ExternalPersistence(context);
+        }
+        else {
+            return new InternalPersistence(context);
+        }
     }
 }
 

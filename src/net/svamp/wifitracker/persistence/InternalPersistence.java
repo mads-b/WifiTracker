@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
+ * Persistence class for storing APDataStores to internal flash memory
  */
 public class InternalPersistence extends AbstractPersistence {
 
