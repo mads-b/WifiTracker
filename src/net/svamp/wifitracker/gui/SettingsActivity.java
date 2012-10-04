@@ -27,7 +27,7 @@ public class SettingsActivity extends PreferenceActivity {
     private void makeStorageOptionList(final Context context) {
         final ListPreference storageOption = (ListPreference) this.findPreference("dataPointStorageOption");
         final String[] values = {"internal","external"};
-        final String[] keys = {"Internal storage","External(SD) storage"};
+        final String[] keys = {"Internal memory","External(SD) storage"};
         storageOption.setEntries(keys);
         storageOption.setEntryValues(values);
         int selectionVal = storageOption.findIndexOfValue(storageOption.getValue());

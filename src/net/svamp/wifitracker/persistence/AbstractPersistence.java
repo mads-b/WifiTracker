@@ -4,11 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mads
- * Date: 03.10.12
- * Time: 22:09
- * To change this template use File | Settings | File Templates.
+ * Abstract persistence class implementing some methods used
+ * by both the external and the internal persistence writer.
  */
 public abstract class AbstractPersistence implements Persistence {
 
@@ -49,12 +46,24 @@ public abstract class AbstractPersistence implements Persistence {
         return s;
     }
 
+    /**
+     * Writes a string directly to a file.
+     * @param path File path
+     * @param data String to write to file
+     * @throws IOException
+     */
     protected void writeStringToFile(String path,String data) throws IOException {
         File f = new File(path);
         f.mkdirs();
         writeStringToFile(new FileOutputStream(f),data);
     }
 
+    /**
+     * Writes a string directly to a file.
+     * @param stream Open stream to file
+     * @param data String to write to file
+     * @throws IOException
+     */
     protected void writeStringToFile(OutputStream stream,String data) throws IOException {
         Writer writer = new OutputStreamWriter(new BufferedOutputStream(stream));
         writer.write(data);

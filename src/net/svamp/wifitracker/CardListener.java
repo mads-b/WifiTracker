@@ -11,9 +11,7 @@ import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.core.WifiNetworkList;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Singleton HW handler
@@ -194,5 +192,9 @@ public class CardListener {
         for(APDataStore store : apDataStores.values()) {
             store.computeApPosition();
         }
+    }
+
+    public Collection<APDataStore> getDataPoints() {
+        return apDataStores.values();
     }
 }

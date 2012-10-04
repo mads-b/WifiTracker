@@ -4,15 +4,26 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import net.svamp.wifitracker.CardListener;
 import net.svamp.wifitracker.R;
+import net.svamp.wifitracker.persistence.ExternalPersistence;
+import net.svamp.wifitracker.persistence.InternalPersistence;
+import net.svamp.wifitracker.persistence.Persistence;
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class TracerTabHost extends TabActivity implements View.OnClickListener {
 
     private CardListener cardListener;
+    private ProgressBar persistenceProgress;
+    private FrameLayout tabContent;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +56,11 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
 
         Button recomputeButton = (Button) findViewById(R.id.button_recompute);
         recomputeButton.setOnClickListener(this);
+
+        //The two views below will compete for screen space on heavy operations.
+        persistenceProgress = (ProgressBar) this.findViewById(R.id.persistence_progress);
+        persistenceProgress.setVisibility(ProgressBar.GONE);
+        tabContent = this.getTabHost().getTabContentView();
     }
     protected void onPause() {
         super.onPause();
@@ -67,9 +83,37 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
     public void onClick (View view) {
         if(view.getId()==R.id.button_recompute) {
             cardListener.fireRecomputeOrder();
-
-
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Persistence persistence;
+        //Does the user want to store his data points onto SD card or internally?
+        String persistenceType = PreferenceManager.getDefaultSharedPreferences(this).getString("dataPointStorageOption","internal");
+        if(persistenceType.equals("internal")) {
+            persistence = new InternalPersistence(this);
+        }
+        else {
+            persistence = new ExternalPersistence(this);
+        }
+        //Hide the standard Tab content. We're showing the progress bar now.
+        tabContent.setVisibility(FrameLayout.GONE);
+        persistenceProgress.setVisibility(ProgressBar.VISIBLE);
+        //Save to storage
+        new Thread(new Runnable() {
+            @Override
+            public void run () {
+                try {
+                    persistence.storeApData(cardListener.getDataPoints());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        finish();
     }
 }
  
