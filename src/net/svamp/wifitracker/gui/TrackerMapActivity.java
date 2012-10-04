@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 import com.google.android.maps.*;
 import net.svamp.wifitracker.CardListener;
 import net.svamp.wifitracker.R;
@@ -23,6 +24,9 @@ public class TrackerMapActivity extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
+
+        Toast.makeText(this,R.string.no_gps_fix_yet,Toast.LENGTH_LONG).show();
+
         mapView = (MapView) findViewById(R.id.mapview);
         geoPoint = new GeoPoint(0, 0);
         List<Overlay> mapOverlays = mapView.getOverlays();
@@ -52,8 +56,16 @@ public class TrackerMapActivity extends MapActivity {
                     itemizedoverlay.addOverlay(ap);
 
                 }
-                if(msg.getData().getBoolean("gps_accurate")) {
-                    setGeoPoint((int)(msg.getData().getDouble("curLatitude")*1e6),(int)(msg.getData().getDouble("curLongitude")*1e6));
+                if(msg.getData().get("gps_accurate") != null) {
+                    int lat_e6 = (int) (msg.getData().getDouble("curLatitude")*1e6);
+                    int lon_e6 = (int)(msg.getData().getDouble("curLongitude")*1e6);
+                    if(msg.getData().getBoolean("gps_accurate")) {
+                        setGeoPoint(lat_e6,lon_e6);
+                    }
+                    else {
+                        //Center on user on very first fix.
+                        centerOnUser(lat_e6,lon_e6);
+                    }
                 }
             }
         };
@@ -66,11 +78,12 @@ public class TrackerMapActivity extends MapActivity {
         return false;
     }
     void setGeoPoint (int latitude, int longitude) {
-
         geoPoint=new GeoPoint(latitude,longitude);
+    }
+
+    private void centerOnUser(int latitude, int longitude) {
         if(!centeredOnUser) {
             mapView.getController().setCenter(geoPoint);
-
             centeredOnUser=true;
         }
     }

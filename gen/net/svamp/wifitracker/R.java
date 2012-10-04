@@ -68,9 +68,10 @@ public final class R {
         public static final int change_persistence_warning=0x7f040006;
         public static final int first_gps_fix=0x7f04000c;
         public static final int gps_disabled=0x7f04000b;
-        public static final int help_text=0x7f04000e;
-        public static final int help_title=0x7f04000d;
+        public static final int help_text=0x7f04000f;
+        public static final int help_title=0x7f04000e;
         public static final int loadingDataPointsFromPersistence=0x7f040007;
+        public static final int no_gps_fix_yet=0x7f04000d;
         public static final int savingDataPointsToPersistence=0x7f040008;
         public static final int wifi_disabled=0x7f04000a;
         /**  Simple strings. 
