@@ -49,15 +49,17 @@ public class LatLon {
      * @return Distance in meters.
      */
     public static double distanceBetween(LatLon p1, LatLon p2) {
-        double R = 6371000; // m
-        double dLat = (p2.lat-p1.lat);
-        double dLon = (p2.lon-p1.lon);
-        double lat1 = p1.lat;
-        double lat2 = p2.lat;
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        double R = 6367500; // m
+
+        double dLon = Math.toRadians(p2.lon-p1.lon);
+        double dLat = Math.toRadians(p2.lat-p1.lat);
+        double lat1 = Math.toRadians(p1.lat);
+        double lat2 = Math.toRadians(p2.lat);
+
+        double a = (Math.sin(dLat/2))*Math.sin(dLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon/2)*Math.sin(dLon/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         return R * c;
+
     }
 
     /**

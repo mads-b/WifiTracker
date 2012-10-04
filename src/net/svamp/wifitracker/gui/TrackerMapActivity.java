@@ -56,10 +56,10 @@ public class TrackerMapActivity extends MapActivity {
                     itemizedoverlay.addOverlay(ap);
 
                 }
-                if(msg.getData().get("gps_accurate") != null) {
+                if(msg.getData().get("gpsAccurate") != null) {
                     int lat_e6 = (int) (msg.getData().getDouble("curLatitude")*1e6);
                     int lon_e6 = (int)(msg.getData().getDouble("curLongitude")*1e6);
-                    if(msg.getData().getBoolean("gps_accurate")) {
+                    if(msg.getData().getBoolean("gpsAccurate")) {
                         setGeoPoint(lat_e6,lon_e6);
                     }
                     else {

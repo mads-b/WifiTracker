@@ -83,8 +83,9 @@ public class CompassView extends View{
                             points.remove(ap.bssid);
                         }
                         points.put(ap.bssid,ap);
+                        recalculateRelativeApPositions();
                     }
-                    else if(msg.getData().getBoolean("gps_accurate")) {
+                    else if(msg.getData().getBoolean("gpsAccurate")) {
                         lastLocation = new LatLon(
                                 msg.getData().getDouble("curLatitude"),
                                 msg.getData().getDouble("curLongitude"));
@@ -106,9 +107,11 @@ public class CompassView extends View{
             double distanceTo = LatLon.distanceBetween(lastLocation,apPos);
             //Subtract 90*, as the bearing is due north, and we need a due east one to translate to
             double bearingTo = Math.PI/2-LatLon.bearingBetween(lastLocation,apPos);
-            //We in
-            Point3D apPoint = Point3D.getCylindrical(distanceTo,bearingTo,0);
-            compassPoints.put(ap.ssid,apPoint);
+            //Translate from meters to pixels and from angle and distance to cartesian:
+            Point3D apPoint = Point3D.getCylindrical(distanceTo*smallestRad/compassRad,bearingTo,0);
+            //Move it from 0x0 to center.
+            Point3D apPointCenter = new Point3D(apPoint.x+center.x,apPoint.y+center.y);
+            compassPoints.put(ap.ssid,apPointCenter);
         }
     }
 
@@ -119,6 +122,7 @@ public class CompassView extends View{
         if(center == null) {
             center=new Point3D(getLeft()+getWidth()/2,
                     getTop()+getHeight()/2);
+            //Number of pixels from center to outer ring.
             smallestRad = Math.min(getWidth()/2-10, getHeight()/2-10);
         }
 

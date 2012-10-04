@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 import android.widget.Toast;
 import net.svamp.wifitracker.core.WifiNetworkList;
 import net.svamp.wifitracker.gui.MainActivity;
@@ -58,7 +59,7 @@ public class WifiProcessor extends BroadcastReceiver {
         }
         else {
             running=false;
-            System.out.println("Startscan failed");
+            Log.e("STARTFAIL","Failed to start WifiProcessor");
         }
     }
     @Override

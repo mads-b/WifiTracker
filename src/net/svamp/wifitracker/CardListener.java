@@ -11,7 +11,10 @@ import net.svamp.wifitracker.core.WifiItem;
 import net.svamp.wifitracker.core.WifiNetworkList;
 import org.json.JSONException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Singleton HW handler
@@ -91,14 +94,7 @@ public class CardListener {
             apStore.addData(lastLocation, item.level);
             apDataStores.put(item.bssid, apStore);
         }
-
-        //Update all handlers as number of datapoints just changed
-        int dataPoints = getNumberOfDataPoints();
-        Bundle b=new Bundle();
-        b.putInt("dataPointNum", dataPoints);
-        Message m=new Message();
-        m.setData(b);
-        sendMessage(m);
+        Log.d("SCANRESULT","Wifi scan finished");
     }
 
     public LocationProcessor getLocationProcessor() {
@@ -132,6 +128,13 @@ public class CardListener {
             m.setData(b);
             sendMessage(m);
         }
+        //Update all handlers as number of datapoints just changed
+        int dataPoints = getNumberOfDataPoints();
+        Bundle b=new Bundle();
+        b.putInt("dataPointNum", dataPoints);
+        Message m=new Message();
+        m.setData(b);
+        sendMessage(m);
     }
 
 
@@ -144,6 +147,7 @@ public class CardListener {
         wifiProcessor.startScan();
         locationProcessor.startProvider();
         compassProcessor.registerListeners();
+
     }
 
     public void stopScan() {
