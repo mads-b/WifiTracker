@@ -54,11 +54,11 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
-        //intent = new Intent().setClass(this, TrackerMapActivity.class);
-        //spec = tabHost.newTabSpec("map").setIndicator("Map Mode",
-        //		res.getDrawable(R.drawable.ic_tab_map))
-        //		.setContent(intent);
-        //tabHost.addTab(spec);
+        intent = new Intent().setClass(this, TrackerMapActivity.class);
+        spec = tabHost.newTabSpec("map").setIndicator("Map Mode",
+        		res.getDrawable(R.drawable.ic_tab_map))
+        		.setContent(intent);
+        tabHost.addTab(spec);
         tabHost.setCurrentTab(0);
 
         Button recomputeButton = (Button) findViewById(R.id.button_recompute);

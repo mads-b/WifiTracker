@@ -5,11 +5,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true"
-        android:apiKey="0qywX4N8ZmiVBL8ZpTXbF1GJiQUlRq1f0X6_1mg" />
+  <com.google.android.maps.MapView
+      android:id="@+id/mapview"
+      android:clickable="true"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:apiKey="0OWdwyoef-aYKo65szjK9NojV1INQPEvnSPZQvA"
+      />
 
 </RelativeLayout>

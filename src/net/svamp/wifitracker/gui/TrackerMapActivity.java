@@ -4,9 +4,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import com.google.android.maps.*;
 import net.svamp.wifitracker.CardListener;
 import net.svamp.wifitracker.R;
+import net.svamp.wifitracker.core.WifiItem;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -23,8 +27,9 @@ public class TrackerMapActivity extends MapActivity {
         geoPoint = new GeoPoint(0, 0);
         List<Overlay> mapOverlays = mapView.getOverlays();
         mapView.getController().setZoom(18);
-        Drawable drawable = this.getResources().getDrawable(R.drawable.ap_icon);
 
+        //Set AP logo on map
+        Drawable drawable = this.getResources().getDrawable(R.drawable.ap_icon);
         itemizedoverlay = new MapItemizedOverlay(drawable);
         mapOverlays.add(itemizedoverlay);
 
@@ -33,20 +38,21 @@ public class TrackerMapActivity extends MapActivity {
             @Override
             public void handleMessage(Message msg) {
                 /* get values from message. */
-
                 //New Data about an AP's position!
-                if(msg.getData().get("newAPPointData")!=null) {
-                    String apName = msg.getData().getString("apName");
-                    double apLat = msg.getData().getDouble("apLatitude");
-                    double apLong = msg.getData().getDouble("apLongitude");
-                    //We have this AP on map already. Delete and re-add.
-                    GeoPoint point = new GeoPoint((int)(apLat*1e6),(int)(apLong*1e6));
-                    OverlayItem overlayitem = new OverlayItem(point, "Access Point", apName);
-                    itemizedoverlay.addOverlay(overlayitem);
+                if(msg.getData().getBoolean("newAPPointData")) {
+                    //Fetch and deserialize json.
+                    WifiItem ap = null;
+                    try {
+                        ap = new WifiItem(new JSONObject(msg.getData().getString("wifiItemJson")));
+                    } catch (JSONException e) {
+                        Log.e("JSONException",e.getMessage());
+                    }
+                    //Add ap to overlay
 
+                    itemizedoverlay.addOverlay(ap);
 
                 }
-                if(msg.getData().get("gps_accurate")!=null) {
+                if(msg.getData().getBoolean("gps_accurate")) {
                     setGeoPoint((int)(msg.getData().getDouble("curLatitude")*1e6),(int)(msg.getData().getDouble("curLongitude")*1e6));
                 }
             }

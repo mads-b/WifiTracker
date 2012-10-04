@@ -2,13 +2,15 @@ package net.svamp.wifitracker.gui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
+import net.svamp.wifitracker.core.WifiItem;
 
-import java.util.ArrayList;
+import java.util.*;
 
 class MapItemizedOverlay extends ItemizedOverlay {
-    private final ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+    private final List<APOverlayItem> mOverlays = new LinkedList<APOverlayItem>();
 
     public MapItemizedOverlay(Drawable defaultMarker) {
         super(boundCenterBottom(defaultMarker));
@@ -17,7 +19,6 @@ class MapItemizedOverlay extends ItemizedOverlay {
 
     public MapItemizedOverlay(Drawable defaultMarker, Context context) {
         super(defaultMarker);
-        Context mContext = context;
         populate();
     }
 
@@ -26,7 +27,13 @@ class MapItemizedOverlay extends ItemizedOverlay {
         return mOverlays.get(i);
     }
 
-    public void addOverlay(OverlayItem overlay) {
+    public void addOverlay(WifiItem wifiItem) {
+        GeoPoint point = new GeoPoint((int)(wifiItem.location.getLat()*1e6),(int)(wifiItem.location.getLon()*1e6));
+        APOverlayItem overlay = new APOverlayItem(point,wifiItem.ssid,wifiItem.bssid);
+
+        //Remove it if it exists already.
+        mOverlays.remove(wifiItem.bssid);
+        //Add the new one.
         mOverlays.add(overlay);
         populate();
     }
@@ -45,5 +52,23 @@ class MapItemizedOverlay extends ItemizedOverlay {
 //	  return true;
 //	}
 
+
+    /**
+     * Helper class making OverlayItems comparable given only title and snippet
+     */
+    private class APOverlayItem extends OverlayItem {
+        public APOverlayItem (GeoPoint geoPoint, String s, String s1) {
+            super(geoPoint, s, s1);
+        }
+
+        public boolean equals(Object o) {
+            if(o instanceof  APOverlayItem) {
+                APOverlayItem item = (APOverlayItem) o;
+                return item.getTitle().equals(getTitle()) && item.getSnippet().equals(getSnippet());
+            }
+            return false;
+        }
+
+    }
 }
  
