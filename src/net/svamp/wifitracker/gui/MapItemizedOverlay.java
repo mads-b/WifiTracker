@@ -1,57 +1,123 @@
 package net.svamp.wifitracker.gui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import net.svamp.wifitracker.core.WifiItem;
 
-import java.util.*;
+import java.util.ArrayList;
 
-class MapItemizedOverlay extends ItemizedOverlay {
-    private final List<APOverlayItem> mOverlays = new LinkedList<APOverlayItem>();
 
-    public MapItemizedOverlay(Drawable defaultMarker) {
+public class MapItemizedOverlay extends ItemizedOverlay<OverlayItem>
+{
+    //member variables
+    private ArrayList<APOverlayItem> mOverlays = new ArrayList<APOverlayItem>();
+    private Context mContext;
+    private int mTextSize;
+
+
+    public MapItemizedOverlay(Drawable defaultMarker, Context context, int textSize)
+    {
         super(boundCenterBottom(defaultMarker));
-        populate();
+        mContext = context;
+        mTextSize = textSize;
     }
 
-    public MapItemizedOverlay(Drawable defaultMarker, Context context) {
-        super(defaultMarker);
-        populate();
-    }
 
+    //In order for the populate() method to read each OverlayItem, it will make a request to createItem(int)
+    // define this method to properly read from our ArrayList
     @Override
-    protected OverlayItem createItem(int i) {
+    protected OverlayItem createItem(int i)
+    {
         return mOverlays.get(i);
     }
 
-    public void addOverlay(WifiItem wifiItem) {
-        GeoPoint point = new GeoPoint((int)(wifiItem.location.getLat()*1e6),(int)(wifiItem.location.getLon()*1e6));
-        APOverlayItem overlay = new APOverlayItem(point,wifiItem.ssid,wifiItem.bssid);
 
-        //Remove it if it exists already.
-        mOverlays.remove(wifiItem.bssid);
-        //Add the new one.
-        mOverlays.add(overlay);
-        populate();
+    @Override
+    public int size()
+    {
+        return mOverlays.size();
     }
 
     @Override
-    public int size() {
-        return mOverlays.size();
-    }
-//	@Override
-//	protected boolean onTap(int index) {
-//	  OverlayItem item = mOverlays.get(index);
-//	  AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-//	  dialog.setTitle(item.getTitle());
-//	  dialog.setMessage(item.getSnippet());
-//	  dialog.show();
-//	  return true;
-//	}
+    protected boolean onTap(int index)
+    {
+        OverlayItem item = mOverlays.get(index);
 
+        //Do stuff here when you tap, i.e. :
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+        dialog.setTitle(item.getTitle());
+        dialog.setMessage(item.getSnippet());
+        dialog.show();
+
+        //return true to indicate we've taken care of it
+        return true;
+    }
+
+    @Override
+    public void draw(android.graphics.Canvas canvas, MapView mapView, boolean shadow)
+    {
+        super.draw(canvas, mapView, shadow);
+
+        if (shadow == false)
+        {
+            //cycle through all overlays
+            for (int index = 0; index < mOverlays.size(); index++)
+            {
+                OverlayItem item = mOverlays.get(index);
+
+                // Converts lat/lng-Point to coordinates on the screen
+                GeoPoint point = item.getPoint();
+                Point ptScreenCoord = new Point() ;
+                mapView.getProjection().toPixels(point, ptScreenCoord);
+
+                //Paint
+                Paint paint = new Paint();
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(mTextSize);
+                paint.setFakeBoldText(true);
+                paint.setARGB(150, 0, 50, 0); // alpha, r, g, b (Black, semi see-through)
+
+                //show text to the right of the icon
+                canvas.drawText(item.getTitle(), ptScreenCoord.x, ptScreenCoord.y+mTextSize, paint);
+            }
+        }
+    }
+
+
+    public void addOverlay(WifiItem ap)
+    {
+        GeoPoint point = new GeoPoint((int)(ap.location.getLat()*1e6),(int)(ap.location.getLon()*1e6));
+        APOverlayItem item = new APOverlayItem(point,ap.ssid,
+                "BSSID: "+ap.bssid+"\n"
+                        +"Features: "+ap.features+"\n"
+                        +"Freq (MhZ): "+ap.freq);
+        if(mOverlays.contains(item)) {
+            mOverlays.remove(item);
+        }
+        mOverlays.add(item);
+        populate();
+    }
+
+
+    public void removeOverlay(OverlayItem overlay)
+    {
+        mOverlays.remove(overlay);
+        populate();
+    }
+
+
+    public void clear()
+    {
+        mOverlays.clear();
+        populate();
+    }
 
     /**
      * Helper class making OverlayItems comparable given only title and snippet
@@ -70,5 +136,5 @@ class MapItemizedOverlay extends ItemizedOverlay {
         }
 
     }
+
 }
- 

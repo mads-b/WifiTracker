@@ -26,7 +26,9 @@ public class WifiItem {
         freq = json.getInt("freq");
         level = json.getInt("level");
         bssid = json.getString("bssid");
-        location = new LatLon(json.getJSONObject("location"));
+        if(json.has("location")) {
+            location = new LatLon(json.getJSONObject("location"));
+        }
     }
     /**
      * @return The drawable.id of an image that represents the security of a given {@link WifiItem}.
@@ -48,7 +50,9 @@ public class WifiItem {
         object.put("freq",freq);
         object.put("level",level);
         object.put("bssid", bssid);
-        object.putOpt("location", location.toJson());
+        if(location!=null) {
+            object.putOpt("location", location.toJson());
+        }
         return object;
     }
 

@@ -29,6 +29,7 @@ public class SettingsActivity extends PreferenceActivity {
         final Context context = this;
         storageOption.setEntries(keys);
         storageOption.setEntryValues(values);
+
         int selectionVal = storageOption.findIndexOfValue(storageOption.getValue());
         storageOption.setSummary(keys[selectionVal]);
         storageOption.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {

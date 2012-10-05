@@ -29,9 +29,10 @@ class GpsStatusListener implements GpsStatus.Listener{
                 for (GpsSatellite gpsSatellite : gpsStatus.getSatellites()) {
                     sat_counter++;
                 }
-                satsAvailable = sat_counter;
-                listener.onSatNumChanged(satsAvailable);
-                System.out.println(satsAvailable+" satellites found");
+                if(satsAvailable!=sat_counter) {
+                    satsAvailable = sat_counter;
+                    listener.onSatNumChanged(satsAvailable);
+                }
 
                 break;
             case GpsStatus.GPS_EVENT_STARTED:

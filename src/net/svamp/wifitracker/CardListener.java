@@ -77,7 +77,6 @@ public class CardListener {
         //Loction must be accurate enough for us to pass it along. Return if not.
         if(lastLocation.getAccuracy()>LocationProcessor.minAccuracy) { return; }
 
-
         Log.d("GPS LOCATION FOUND", "Found GPS location and merging data.");
         for(WifiItem item : foundWifi) {
             APDataStore apStore;
@@ -86,15 +85,14 @@ public class CardListener {
                 apStore = new APDataStore(item);
                 apStore.setListener(this);
             }
-                //Existing found. Get dataset and add new info
+            //Existing found. Get dataset and add new info
             else
                 apStore = apDataStores.get(item.bssid);
-
-
             apStore.addData(lastLocation, item.level);
             apDataStores.put(item.bssid, apStore);
         }
         Log.d("SCANRESULT","Wifi scan finished");
+        fireDataPointNumChanged();
     }
 
     public LocationProcessor getLocationProcessor() {
@@ -128,13 +126,6 @@ public class CardListener {
             m.setData(b);
             sendMessage(m);
         }
-        //Update all handlers as number of datapoints just changed
-        int dataPoints = getNumberOfDataPoints();
-        Bundle b=new Bundle();
-        b.putInt("dataPointNum", dataPoints);
-        Message m=new Message();
-        m.setData(b);
-        sendMessage(m);
     }
 
 
@@ -164,6 +155,28 @@ public class CardListener {
         Message m=new Message();
         m.setData(b);
         sendMessage(m);
+/*
+        if(apDataStores.size()==0) {
+            Log.d("EMPTYDATASTOREEXCEPTION","No datastore items! Making one :(");
+            WifiItem item = new WifiItem();
+            item.bssid = "DE:AD:BE:EF:DE:AD";
+            item.features = "WPA2";
+            item.freq = 2400;
+            item.ssid = "Dummy AP";
+            item.level = -35;
+
+            Location dummyLocation = new Location("no provider");
+            dummyLocation.setLatitude(63);
+            dummyLocation.setLongitude(10);
+
+            APDataStore store = new APDataStore(item);
+            store.addData(dummyLocation,-35);
+
+
+            apDataStores.put(item.bssid,store);
+            fireDataPointNumChanged();
+        }*/
+
     }
 
     public double getCompassOrientation() {
@@ -183,10 +196,19 @@ public class CardListener {
      * This method takes this new data, bundles it, and sends it as an Android message
      * @param apStore The APDataStore
      */
-    public void fireApPositionComputed(APDataStore apStore) throws JSONException {
+    public void fireApPositionComputed (APDataStore apStore) throws JSONException {
         Bundle b=new Bundle();
         b.putBoolean("newAPPointData", true);
         b.putString("wifiItemJson",apStore.getWifiItem().toJson().toString());
+        Message m=new Message();
+        m.setData(b);
+        sendMessage(m);
+    }
+    private void fireDataPointNumChanged() {
+        //Update all handlers as number of datapoints just changed
+        int dataPoints = getNumberOfDataPoints();
+        Bundle b=new Bundle();
+        b.putInt("dataPointNum", dataPoints);
         Message m=new Message();
         m.setData(b);
         sendMessage(m);
@@ -207,6 +229,7 @@ public class CardListener {
      * @param dataPoints Datapoints to add.
      */
     public void addDataPoints (APDataStore dataPoints) {
-            apDataStores.put(dataPoints.getWifiItem().bssid,dataPoints);
+        apDataStores.put(dataPoints.getWifiItem().bssid,dataPoints);
+        fireDataPointNumChanged();
     }
 }

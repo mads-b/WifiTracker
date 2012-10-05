@@ -32,7 +32,8 @@
     <ListPreference
         android:title="Data point storage"
         android:summary="Choose where to store data points"
-        android:key="dataPointStorageOption" />
+        android:key="dataPointStorageOption"
+        android:defaultValue="internal" />
 		<net.svamp.wifitracker.gui.SeekBarPreference
 				android:key="minAccuracy"
 				android:title="Minimum GPS accuracy"

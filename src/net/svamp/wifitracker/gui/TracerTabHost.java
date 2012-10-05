@@ -66,22 +66,23 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
 
         //Fetch the correct persistence class...
         persistence = AbstractPersistence.getPersistence(this);
-
+        //Show dialog..
+        dialog.show();
         new Thread(new Runnable() {
             @Override
             public void run () {
                 //Fetch and add persisted datapoints to data store.
                 Collection<APDataStore> dataPoints = persistence.fetchApData();
+
                 if(dataPoints.size()!=0) {
-                    //Show dialog..
-                    dialog.show();
                     int increment = 100/dataPoints.size();
                     for(APDataStore store : dataPoints) {
+                        if(store==null) System.out.println("WTF?!!!");
                         cardListener.addDataPoints(store);
                         dialog.incrementProgressBy(increment);
                     }
-                    dialog.dismiss();
                 }
+                dialog.dismiss();
             }
         }).start();
     }
@@ -92,7 +93,7 @@ public class TracerTabHost extends TabActivity implements View.OnClickListener {
             Toast.makeText(this,R.string.savingDataPointsToPersistence,Toast.LENGTH_SHORT).show();
             persistence.storeApData(cardListener.getDataPoints());
         } catch (IOException e) {
-            Log.e("IOException",e.getMessage());
+            Log.e("IOException",e.getLocalizedMessage());
         }
     }
 

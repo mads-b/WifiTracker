@@ -19,17 +19,16 @@ public class ExternalPersistence extends AbstractPersistence {
     private static String dataFolderName;
 
     public ExternalPersistence (Context context) {
-        dataFolderName = context.getExternalFilesDir(null).getAbsolutePath()+"/.WifiTrackerData/";
+        dataFolderName = context.getExternalFilesDir(null).getAbsolutePath()+"/";
     }
 
     @Override
     public void storeApData (Collection<APDataStore> apData) throws IOException {
         for(APDataStore dataStore : apData) {
             String dst = dataFolderName + dataStore.getWifiItem().bssid +"/";
-
             try {
-                this.writeStringToFile(dst+"ApInfo.dat",dataStore.getWifiItem().toJson().toString());
-                this.writeStringToFile(dst+"ApDataPoints.dat",dataStore.toJson().toString());
+                this.writeStringToFile(dst,"ApInfo.dat",dataStore.getWifiItem().toJson().toString());
+                this.writeStringToFile(dst,"ApDataPoints.dat",dataStore.toJson().toString());
             } catch (JSONException e) {
                 Log.e("CORRUPT DATA","Failed to JSONify APData. "+e.getLocalizedMessage());
             }
@@ -43,7 +42,10 @@ public class ExternalPersistence extends AbstractPersistence {
         try {
             //Iterate over all data files on sd card
             for(String bss : new File(dataFolderName).list()) {
-                apData.add(fetchApData(bss));
+                APDataStore store = fetchApData(bss);
+                if(store!=null) {
+                    apData.add(fetchApData(bss));
+                }
             }
         } catch (IOException e) {
             Log.e("IOException","File could not be read. "+e.getLocalizedMessage());

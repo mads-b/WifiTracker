@@ -2,8 +2,19 @@ package net.svamp.wifitracker.persistence;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Scanner;
 
 /**
@@ -55,10 +66,20 @@ public abstract class AbstractPersistence implements Persistence {
      * @param data String to write to file
      * @throws IOException
      */
-    void writeStringToFile (String path, String data) throws IOException {
-        File f = new File(path);
-        f.mkdirs();
-        writeStringToFile(new FileOutputStream(f),data);
+    void writeStringToFile (String path,String file, String data) throws IOException {
+        File f = new File(path,file);
+        File folder = new File(path);
+        if(!folder.exists()) {
+            Log.d("UNMADEFOLDER",path+" is not a directory.. Trying to make it!");
+            if(!folder.mkdir()) {
+                Log.e("MKDIRERR","Cannot make folder "+path+"! What to do?");
+            }
+        }
+        if(!f.exists()) {
+            Log.d("UNMADEFILE",file+" does not exist.. Trying to make it!");
+            f.createNewFile();
+        }
+        writeStringToFile(new FileOutputStream(f), data);
     }
 
     /**

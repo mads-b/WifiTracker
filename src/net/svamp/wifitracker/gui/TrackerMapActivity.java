@@ -34,7 +34,7 @@ public class TrackerMapActivity extends MapActivity {
 
         //Set AP logo on map
         Drawable drawable = this.getResources().getDrawable(R.drawable.ap_icon);
-        itemizedoverlay = new MapItemizedOverlay(drawable);
+        itemizedoverlay = new MapItemizedOverlay(drawable,this,18);
         mapOverlays.add(itemizedoverlay);
 
 
