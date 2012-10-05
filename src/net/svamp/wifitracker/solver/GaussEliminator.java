@@ -1,7 +1,5 @@
 package net.svamp.wifitracker.solver;
 
-import java.util.Arrays;
-
 /**
  * Simple class implementing the Gauss elimination algorithm for linear systems.
  * NOTE: The A matrix used within is defined like the mathematical definition of matrices (A[rows][columns])
@@ -22,9 +20,6 @@ class GaussEliminator {
         if(A.length != b.length) throw new IllegalArgumentException("Solution vector b is not the correct size!");
         GaussEliminator.gaussElimination(A,b);
         GaussEliminator.backSubstitution(A,b);
-        for(double[] rows : A)
-            System.out.println(Arrays.toString(rows));
-        System.out.println(Arrays.toString(b));
         return b;
     }
 

@@ -50,7 +50,7 @@ public class APDataStore extends Thread {
         if(loc.getAccuracy()>LocationProcessor.minAccuracy) { return; }
 
         SignalDataPoint newP = new SignalDataPoint(new LatLon(loc.getLatitude(),loc.getLongitude()),str);
-        
+
         for(int i=0;i<coords.size();i++) {
             //If distance is less than the accuracy, it is assumed to be the same spot
             if(SignalDataPoint.distanceBetween(coords.get(i), newP)<LocationProcessor.minAccuracy) {
@@ -127,8 +127,13 @@ public class APDataStore extends Thread {
             solutionVector[1]= wifiItem.location.getLat();
         }
 
+        try {
         GaussNewtonSolver solver = new GaussNewtonSolver(coords);
         solutionVector = solver.solve(solutionVector,5);
+        } catch (IllegalArgumentException e) {
+            Log.d("SOLVER_FAILED",e.getLocalizedMessage());
+            return;
+        }
         //Input solution into WifiItem
         wifiItem.location = new LatLon(solutionVector[1],solutionVector[0]);
 
