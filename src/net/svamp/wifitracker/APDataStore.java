@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class APDataStore extends Thread {
 
     private final WifiItem wifiItem;
-    //Number of datapoints in this location. Using this for increased computation speed.
-    private final ArrayList<Integer> points = new ArrayList<Integer>();
     //Data points. x and y are latitude and longitude, z is signal strength.
     private final ArrayList<SignalDataPoint> coords = new ArrayList<SignalDataPoint>();
     private CardListener apPositionListener;
@@ -51,28 +49,8 @@ public class APDataStore extends Thread {
 
         SignalDataPoint newP = new SignalDataPoint(new LatLon(loc.getLatitude(),loc.getLongitude()),str);
 
-        for(int i=0;i<coords.size();i++) {
-            //If distance is less than the accuracy, it is assumed to be the same spot
-            if(SignalDataPoint.distanceBetween(coords.get(i), newP)<LocationProcessor.minAccuracy) {
-                //Compute average of the signal strengths in this spot
-                //Now one more datapoint in this area
-                points.set(i,points.get(i)+1);
-                //Calculate centroid of these two points
-                LatLon[] temp = {coords.get(i).getCoords(),newP.getCoords()};
-                LatLon resultP = LatLon.getCentroid(temp);
-                //Calculate average signal level in this area
-                double newSignal = coords.get(i).getSignalStrength()*(1-1/points.get(i))
-                        +newP.getSignalStrength()/points.get(i);
-
-                SignalDataPoint result = new SignalDataPoint(resultP,newSignal);
-
-                coords.set(i, result);
-                return;
-            }
-        }
-        //No point was found in the store that were close to this one. Add it as a new data point.
+        //Add it to the store
         coords.add(newP);
-        points.add(1);
     }
 
     /**
