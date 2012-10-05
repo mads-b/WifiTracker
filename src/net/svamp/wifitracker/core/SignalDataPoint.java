@@ -35,7 +35,8 @@ public class SignalDataPoint {
         Iterator<SignalDataPoint> it = coords.iterator();
         SignalDataPoint curPoint;
 
-        while((curPoint=it.next())!=null) {
+        while(it.hasNext()) {
+            curPoint = it.next();
             accLat+=curPoint.getCoords().getLat();
             accLon+=curPoint.getCoords().getLon();
         }
@@ -47,5 +48,8 @@ public class SignalDataPoint {
         json.put("signalStrength",signalStrength);
         json.put("coords",coords.toJson());
         return json;
+    }
+    public static double distanceBetween(SignalDataPoint p1, SignalDataPoint p2) {
+        return LatLon.distanceBetween(p1.getCoords(),p2.getCoords());
     }
 }

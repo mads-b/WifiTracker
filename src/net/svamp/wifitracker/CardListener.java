@@ -84,12 +84,14 @@ public class CardListener {
             if(!apDataStores.containsKey(item.bssid)) {
                 apStore = new APDataStore(item);
                 apStore.setListener(this);
+                apDataStores.put(item.bssid,apStore);
             }
             //Existing found. Get dataset and add new info
-            else
+            else {
                 apStore = apDataStores.get(item.bssid);
-            apStore.addData(lastLocation, item.level);
-            apDataStores.put(item.bssid, apStore);
+                apStore.addData(lastLocation, item.level);
+                apDataStores.put(item.bssid, apStore);
+            }
         }
         Log.d("SCANRESULT","Wifi scan finished");
         fireDataPointNumChanged();

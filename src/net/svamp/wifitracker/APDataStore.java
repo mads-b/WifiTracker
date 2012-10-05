@@ -46,16 +46,14 @@ public class APDataStore extends Thread {
      */
     public void addData(Location loc, double str) {
         //Check if datapoint is precise enough to use
-        Log.d("ADDING_DATAPOINT", "Lat: " + loc.getLatitude() + " Long: " + loc.getLongitude() + " Strength: " + str);
-
         //If accuracy is too bad, don't do anything.
         if(loc.getAccuracy()>LocationProcessor.minAccuracy) { return; }
 
         SignalDataPoint newP = new SignalDataPoint(new LatLon(loc.getLatitude(),loc.getLongitude()),str);
-        boolean spotExists=false;
+        
         for(int i=0;i<coords.size();i++) {
             //If distance is less than the accuracy, it is assumed to be the same spot
-            if(LatLon.distanceBetween(coords.get(i).getCoords(), newP.getCoords())<LocationProcessor.minAccuracy && !spotExists) {
+            if(SignalDataPoint.distanceBetween(coords.get(i), newP)<LocationProcessor.minAccuracy) {
                 //Compute average of the signal strengths in this spot
                 //Now one more datapoint in this area
                 points.set(i,points.get(i)+1);
@@ -84,8 +82,10 @@ public class APDataStore extends Thread {
      * @see net.svamp.wifitracker.solver.ThompsonJacobian
      */
     public void computeApPosition () {
-        if(coords.size()>=4)
+        if(coords.size()>=6) {
+            Log.d("COMPUTING", "Computing position of AP: " + wifiItem.ssid + " with " + coords.size() + " points");
             this.start();
+        }
     }
 
     /**
@@ -126,13 +126,16 @@ public class APDataStore extends Thread {
             solutionVector[0]= wifiItem.location.getLon();
             solutionVector[1]= wifiItem.location.getLat();
         }
+
         GaussNewtonSolver solver = new GaussNewtonSolver(coords);
         solutionVector = solver.solve(solutionVector,5);
         //Input solution into WifiItem
         wifiItem.location = new LatLon(solutionVector[1],solutionVector[0]);
 
         try {
-            apPositionListener.fireApPositionComputed(this);
+            if(apPositionListener!=null) {
+                apPositionListener.fireApPositionComputed(this);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

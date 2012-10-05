@@ -29,6 +29,10 @@ public class GaussNewtonSolver {
             J.setNewEstimates(curEstimate);
 
             double[][] leftEq = getJTransposeTimesJ();
+            for(double cols[] : leftEq) {
+                System.out.println(Arrays.toString(cols));
+            }
+
             double[] rightEq = getJTransposeTimesResidual();
             double[] newEstimate = GaussEliminator.solve(leftEq,rightEq);
 
